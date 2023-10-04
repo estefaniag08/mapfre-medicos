@@ -1,0 +1,26 @@
+.title-container {
+    height: 6rem;
+}
+.mapfre-title {
+    background-color: #ffb507;
+
+    &::before {
+        content: '';
+        margin-left: 10%;
+    }
+}
+
+.mapfre-title.identificacion-title {
+    top: 10%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 990px) {
+
+}
+
+@media screen and (min-width: 300px) and (max-width: 768px) {
+    .especialidad-container h1 {
+        font-size: 1.32rem;
+        line-height: 1.2;
+    }
+}

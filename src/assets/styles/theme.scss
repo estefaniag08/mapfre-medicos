@@ -1,0 +1,20 @@
+$primary: (
+  red-1: #c71700,
+  red-2: #8a130f,
+  red-3: hsl(0, 100%, 92%),
+  contrast: (
+    red-1: white,
+    red-2: white,
+    Dark: black,
+  ),
+);
+$accent: (
+  yellow-1: #ffb507,
+  yellow-2: #b38c00,
+  yellow-3: #ffc233,
+  contrast: (
+    yellow-1: black,
+    yellow-2: black,
+    yellow-3: black,
+  ),
+);

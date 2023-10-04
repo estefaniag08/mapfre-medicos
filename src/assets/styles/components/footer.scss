@@ -1,0 +1,97 @@
+
+.home-footer .footer-container {
+    background-color: #cb240e;
+}
+
+.social-media.social-media-mobile {
+    display: none;
+}
+.footer-container {
+    padding: 1rem auto;
+    background-color: #5f5f5f;
+    display: flex;
+    color: white;
+    
+    p {
+        margin: 0;
+    }
+}
+
+.footer-column {
+    width: 20%;
+}
+
+.footer-content {
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.atencion-title {
+    font-weight: 700;
+}
+
+.atencion-phone {
+    font-size: 2rem;
+    margin: 5px 0 !important;
+}
+
+.lineas-atencion,
+.horarios-atencion,
+.sede,
+.social-media {
+    width: 300px;
+    margin: 1rem 0;
+}
+
+.social-media {
+    font-size: 3rem;
+    span {
+        margin: 0.5rem;
+    }
+}
+.social-media-icon {
+    color: white;
+    text-decoration: none;
+    &:hover {
+        color: whitesmoke;
+        text-decoration: none;
+    }
+}
+
+@media screen and (min-width: 300px) and (max-width: 768px) {
+    .footer-container {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .footer-content {
+        padding: 0 1.5rem;
+        justify-content: flex-start;
+    }
+
+    .lineas-atencion,
+    .horarios-atencion,
+    .sede,
+    .social-media {
+        margin: 5px 0;
+    }
+
+    .social-media {
+        display: none;
+    }
+
+    .social-media.social-media-mobile {
+        display: block;
+    }
+
+    .footer-column {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .footer-content {
+        width: 280px;
+        padding: 0 1rem;
+    }
+}

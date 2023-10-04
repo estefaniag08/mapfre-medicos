@@ -1,0 +1,15 @@
+<h2>Modifica tu número RC para actualizar tu cotización</h2>
+<form [formGroup]="cambioRC">
+    <mat-form-field appearance="outline" class="cambiar-rc-input">
+        <mat-label>Valor asegurado</mat-label>
+        <mat-select formControlName="valorRC">
+            <mat-option *ngFor="let valorSeguro of valorAsegurado" [value]="valorSeguro.id_clase_rc_medico">
+                {{valorSeguro.rc_medico.numero_rc_medico | currency}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="form-button-container cambiar-rc">
+        <button mat-raised-button class="form-button" (click)="enviarCambioRC()">CAMBIAR VALOR</button>
+        <button mat-dialog-close class="mat-raised-button">CERRAR</button>
+    </div>
+</form>

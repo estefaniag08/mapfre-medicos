@@ -1,0 +1,148 @@
+.contenedor {
+  min-width: 370px;
+  max-width: 370px;
+  margin: 1.5rem auto;
+}
+
+.contenedor .btn-form-container {
+  align-items: center;
+  flex-direction: column;
+
+  button {
+    width: 50%;
+    &:first-child {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(207, 207, 207);
+
+  &:last-of-type {
+    border: none;
+  }
+}
+
+.input-container p {
+  margin: 0;
+}
+
+.input-container .hint {
+  font-size: 12px;
+  color: rgb(94, 94, 94);
+  height: 18px;
+}
+.input-file + label * {
+  pointer-events: none;
+}
+
+.input-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.input-container label,
+.input-file + label {
+  color: var(--rojo-primario);
+  text-decoration: underline;
+  display: inline-block;
+  transition: all 0.4s;
+  width: 100%;
+}
+
+.input-container label:hover,
+.input-container input:focus-visible,
+.input-container input:focus {
+  cursor: pointer;
+  color: #982525;
+}
+
+.input-file:focus-visible + label {
+  outline: 1px solid var(--rojo-primario);
+  outline: -webkit-focus-ring-color auto 5px;
+  box-shadow: 0px 0px 3px #ffa3a3;
+}
+
+.input-container label.ok {
+  color: var(--verde-700);
+  text-decoration: none;
+  display: flex;
+  font-weight: 600;
+}
+
+.input-container label.ok::before {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  content: "\e2e6";
+  margin-right: 5px;
+  font-size: 24px;
+}
+
+.input-container label.ok:hover {
+  color: var(--verde-700);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.input-container label.error {
+  color: red;
+  text-decoration: none;
+  display: flex;
+  font-weight: 600;
+  padding: 10px;
+  border: 1px solid red;
+  max-width: 320px;
+  border-radius: 3px;
+}
+
+.input-container label.error::before {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  content: "\e001";
+  margin-right: 5px;
+  font-size: 24px;
+}
+
+
+.input-container label.error:hover {
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--elevacion-2);
+}
+
+.error-alert {
+  background-color: var(--rojo-100);
+  padding: 14px;
+  color: var(--rojo-700);
+  border-left: 5px solid var(--rojo-700);
+  max-width: 350px;
+  margin: 12px auto;
+  border-radius: 4px;
+}
+
+.error-alert p {
+  margin-bottom: 0;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+
+@media screen and (max-width: 768px) and (min-width: 300px) {
+  .contenedor {
+    min-width: 270px;
+    max-width: 270px;
+    margin: 10px auto;
+  }
+}

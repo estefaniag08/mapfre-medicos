@@ -1,0 +1,89 @@
+<app-navigation></app-navigation>
+<div class="cotizacion-contenedor">
+    <div class="lineas-container cotizacion">
+        <div class="franja step amarillo"></div>
+    </div>
+    <div class="flex-container cotizacion">
+        <div>
+            <div class="nombre-seguro">
+                <div class="img-mapfre">
+                    <h1>Esta es tu cotización</h1>
+                    <img src="assets/img/logo-color.svg" alt="logo-mapfre" class="logo-mapfre-seguro">
+                </div>
+                <p class="seguro">Seguro</p>
+                <h1>Póliza de responsabilidad civil médica MAPFRE</h1>
+            </div>
+        </div>
+        <div class="contenedor-costos">
+            <div class="costos">
+                <div>
+                    <p> <strong>Total anual:</strong></p>
+                    <div>
+                        <p class="costo-mapfre">{{valorCotizacion.valor_rc | currency : '$' : 'symbol' : '1.0-0'}} </p>
+                    </div>
+                    <p class="hint">*Total anual: Este valor incluye IVA</p>
+                    <div class="form-button-container cotizacion">
+                        <button mat-raised-button class="form-button" (click)="adquirirSeguro()">ADQUIRIR MI
+                            SEGURO</button>
+                        <button mat-raised-button (click)="cambiarValor(valorCotizacion.id_clase_rc_medico)">CAMBIAR
+                            VALOR ASEGURADO</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="detalles-tabs">
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="Descripción" class="tab-content">
+                <p>Estos son tus datos:</p>
+                <p class="subtitulo-tab"><strong>Especialidad:</strong></p>
+                <p>{{especialidad}}</p>
+                <p class="subtitulo-tab"><strong>Tipo de procedimiento:</strong></p>
+                <p>{{clase}}</p>
+                <p class="subtitulo-tab"><strong>Valor RC asegurado:</strong></p>
+                <p>{{valorCotizacion.rc_medico.numero_rc_medico | currency : '$' : 'symbol' : '1.0-0'}}</p>
+            </mat-tab>
+            <mat-tab label="Cobertura" class="tab-content">
+                <p>La póliza de Responsabilidad Civil Profesional Médica de MAPFRE, es un medio de protección para
+                    los profesionales de la salud que deseen amparar los riesgos de Responsabilidad Civil
+                    Profesional
+                    derivados de los daños que puedan causar en el desarrollo y ejercicio de su actividad
+                    profesional.</p>
+
+                <p class="subtitulo-tab"><strong>Coberturas:</strong></p>
+                <p>Valor Asegurado</p>
+                <p class="subtitulo-tab"><strong>Responsabilidad civil actos médicos:</strong></p>
+                <p>{{valorCotizacion.rc_medico.numero_rc_medico | currency : '$' : 'symbol' : '1.0-0'}}</p>
+                <p class="subtitulo-tab"><strong>Gastos de defensa:</strong></p>
+                <p> {{cuarentaPor| currency : '$' : 'symbol' : '1.0-0'}} </p>
+                <p class="subtitulo-tab"><strong> Responsabilidad Civil acto médico auxilio :</strong></p>
+                <p> {{valorCotizacion.rc_medico.numero_rc_medico | currency : '$' : 'symbol' : '1.0-0'}}</p>
+                <p class="subtitulo-tab"><strong> Asistencia médica emergencia :</strong></p>
+                <p> {{valorCotizacion.rc_medico.numero_rc_medico | currency : '$' : 'symbol' : '1.0-0'}}</p>
+                <ul>
+                    <li>Responsabilidad Civil como consecuencia de cualquier “acto médico”
+                        derivado de la prestación de servicios profesionales de atención en salud de
+                        las personas.</li>
+                    <li>Responsabilidad Civil por asistencia médica de emergencia a personas.
+                    </li>
+                    <li>Responsabilidad Civil por actos u omisiones en el ejercicio de la actividad</li>
+                </ul>
+            </mat-tab>
+            <mat-tab label="Requisitos" class="tab-content">
+                <p>La póliza de Responsabilidad Civil profesional Médica de MAPFRE requiere la siguiente
+                    documentación:</p>
+
+                <ul>
+                    <li>Copia de tu cédula de ciudadanía</li>
+                    <li>Copia de tu tarjeta profesional (En caso de se encuente en trámite por favor enviar prueba
+                        de
+                        ello)</li>
+                    <li>Diploma de grado (En caso de tener especialidad incluir documento)</li>
+                    <li>Acta de grado (En caso de tener especialidad incluir documento)</li>
+                </ul>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+<app-footer></app-footer>

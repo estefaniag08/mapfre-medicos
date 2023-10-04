@@ -1,0 +1,190 @@
+.background {
+  position: absolute;
+  background-image: url("../../img/bg-home-dos.jpg");
+  width: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 850px;
+  max-height: 850px;
+  transform: translateY(-200px);
+  z-index: -2;
+}
+
+.mapfre-container.home {
+  margin-top: 150px;
+}
+
+.especialidad-container {
+  color: white;
+  transform: translateY(6rem);
+}
+
+.home-form {
+  margin-top: 2rem;
+}
+
+.flex-container.home {
+  margin-bottom: 50px;
+}
+
+.titulos-home {
+  width: 45%;
+}
+
+.titulos-home h1 {
+  margin-bottom: 5px;
+  font-size: 3rem;
+  text-align: right;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.titulos-home.blanco {
+  color: white;
+}
+
+.lineas-container {
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+}
+
+.franja {
+  background-color: var(--rojo-primario);
+  height: 2.7rem;
+  width: 100%;
+}
+
+.linea {
+  height: 2px;
+  margin-top: 10px;
+  width: 100%;
+}
+.rojo {
+  background-color: var(--rojo-primario);
+}
+
+.amarillo {
+  background-color: #ffb507;
+}
+
+.franja.beneficios,
+.franja.contacto,
+.franja.comentarios {
+  position: relative;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.beneficio-container {
+  display: flex;
+  margin-top: 16px;
+}
+
+.beneficio-descripcion {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.beneficio-descripcion h3 {
+  font-weight: 800;
+  font-size: 18px;
+  margin: 0;
+}
+
+.beneficio-descripcion p {
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.beneficio-icon {
+  font-size: 4rem;
+}
+
+.contacto h2,
+.contacto h1 {
+  margin: 0;
+}
+
+.contacto h1 {
+  color: var(--rojo-primario);
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.contacto p {
+  color: var(--gris-500);
+  margin: 0;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1300px) {
+
+  .titulos-home {
+    width: 100%;
+  }
+
+  .titulos-home h1 {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 990px) {
+  .background {
+    min-height: 700px;
+    max-height: 700px;
+  }
+}
+
+@media screen and (min-width: 451px) and (max-width: 768px) {
+  .background {
+    height: 650px;
+  }
+
+  .especialidad-container {
+    width: 70%;
+    height: 500px;
+    justify-content: flex-start;
+  }
+
+  .especialidad-container h1 {
+    font-size: 1.7rem;
+  }
+
+  .home-form {
+    margin-top: 0.375rem;
+  }
+
+  .titulos-home {
+    width: 100%;
+  }
+
+  .titulos-home h1 {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .background {
+    min-height: 700px;
+    max-height: 700px;
+    transform: translateY(-200px);
+    z-index: -2;
+  }
+
+  .titulos-home {
+    width: 100%;
+  }
+
+  .titulos-home h1 {
+    text-align: left;
+    font-size: 2rem;
+  }
+
+  .especialidad-container {
+    width: 95%;
+    margin: 0 auto;
+  }
+}

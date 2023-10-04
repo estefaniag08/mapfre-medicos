@@ -1,0 +1,43 @@
+.form-container.preguntas-adicionales {
+  min-width: 400px;
+}
+
+.pregunta {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--gris-300);
+  padding: 7px 0;
+}
+
+.pregunta p {
+  font-size: 16px;
+  min-width: 270px;
+  line-height: 1.3;
+  margin: 0;
+}
+
+@media screen and (max-width: 401px){
+    .form-container.preguntas-adicionales {
+        min-width: 300px;
+        max-width: 300px;
+    }
+
+    .pregunta {
+        flex-wrap: wrap;
+    }
+
+    .pregunta p {
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+  .form-container.preguntas-adicionales {
+    min-width: 280px;
+    max-width: 280px;
+    margin: 10px auto;
+  }
+}

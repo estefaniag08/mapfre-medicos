@@ -1,0 +1,20 @@
+<nav class="navigation-container">
+  <div class="navigation-content">
+    <a class="home-logo" routerLink="/"></a>
+    <div class="navigation-icons-container">
+      <a class="navigation-icon" href="https://api.whatsapp.com/send?phone=573124951031" target="_blank">
+        <span class="mapfre-whatsapp-icon"></span>
+      </a>
+      <a type="button" class="navigation-icon mail" href="mailto:contacto@alseguros.co" >
+        <span class="mapfre-email-icon"></span>
+      </a>
+      <a #tooltip="matTooltip" matTooltip="{{correo}}" type="button" class="navigation-mail" [cdkCopyToClipboard]="value"
+      (click)="tooltip.show()">
+      {{value}}
+    </a>
+      <a class="navigation-icon phone" href="tel:+5715801212">
+        <span class="mapfre-phone-icon"></span>
+      </a>
+    </div>
+  </div>
+</nav>

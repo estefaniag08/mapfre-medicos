@@ -1,0 +1,89 @@
+<app-navigation></app-navigation>
+<div class="step-grid">
+    <div class="lineas-container step">
+        <div class="linea step amarillo"></div>
+        <div class="franja step amarillo"></div>
+    </div>
+    <div class="step-form">
+        <h1 class="mb-0">Adjuntar documentos</h1>
+        <div *ngIf="errorCedula != '' || errorTarProf != '' || errorDiploma != '' || errorActa != ''">
+            <div class="error-alert">
+                <p>{{errorCedula}}</p>
+                <p>{{errorTarProf}}</p>
+                <p>{{errorDiploma}}</p>
+                <p>{{errorActa}}</p>
+            </div>
+        </div>
+        <form [formGroup]="adjuntarDocumentosForm" class="form-container">
+            <!-- <input type="file" class="file-input" (change)="onFileChangeCel($event)" #fileUpload formControlName="copiaCedula">
+    
+            <div class="file-upload">
+    
+                {{fileNameEx || "No file uploaded yet."}}
+    
+                <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+            </div> -->
+            <div class="input-container">
+                <label for="copiaCedula" [ngClass]="fileSelectedCed">{{labelCedula}}</label>
+                <input type="file" formControlName="copiaCedula" name="copiaCedula" id="copiaCedula" class="input-file"
+                    accept="image/x-png,image/jpeg,application/pdf" (change)="onFileChangeCel($event)" />
+                <span class="hint">Documento seleccionado:</span>
+                <p> {{ fileNameCed }} </p>
+            </div>
+            <div class="input-container">
+                <label for="copiaTarjetaProfesional" [ngClass]="fileSelectedTarProf">{{labelTarProf}}</label>
+                <input type="file" formControlName="copiaTarjetaProfesional" name="copiaTarjetaProfesional"
+                    id="copiaTarjetaProfesional" class="input-file" accept="image/x-png,image/jpeg,application/pdf"
+                    (change)="onFileChangeTarProf($event)" />
+                <p class="hint documento">En caso de que esté en trámite, por favor enviar prueba de ello</p>
+                <span class="hint">Documento seleccionado:</span>
+                <p> {{ fileNameTarProf }} </p>
+            </div>
+            <div class="input-container">
+                <label for="diplomaGrado" [ngClass]="fileSelectedDipGrad">{{labelDiploma}}</label>
+                <input type="file" class="input-file" formControlName="diplomaGrado" name="diplomaGrado"
+                    id="diplomaGrado" accept="image/x-png,image/jpeg,application/pdf"
+                    (change)="onFileChangeDipGrad($event)" />
+                <p class="hint documento">En caso de tener especialidad incluir documento</p>
+                <span class="hint">Documento seleccionado:</span>
+                <p> {{ fileNameDipGrad }} </p>
+            </div>
+            <div class="input-container">
+                <label for="actaGrado" [ngClass]="fileSelectedActGrad">{{labelActa}}</label>
+                <input type="file" class="input-file" formControlName="actaGrado" name="actaGrado" id="actaGrado"
+                    accept="image/x-png,image/jpeg,application/pdf" (change)="onFileChangeActGrad($event)" />
+                <p class="hint documento">En caso de tener especialidad incluir documento</p>
+                <span class="hint">Documento seleccionado:</span>
+                <p> {{ fileNameActGrad }} </p>
+            </div>
+            <div class="form-button-container">
+                <button mat-raised-button class="form-button" [disabled]="adjuntarDocumentosForm.invalid"
+                    class="btn-form" (click)="adjuntarDocumentosDespues()">OMITIR</button>
+                <button mat-raised-button class="form-button" [disabled]="adjuntarDocumentosForm.invalid"
+                    color="primary" class="btn-form" (click)="sendDocumentosForm()">SIGUIENTE</button>
+            </div>
+        </form>
+    </div>
+    <div class="detalles-container">
+        <div class="aclaraciones-container">
+            <div class="aclaraciones-text profesion">
+                <div>
+                    <div class="general">
+                        <h2>¿Por qué me piden estos datos?</h2>
+                        <p>Estos datos hacen parte del proceso de generación y emisión de tu póliza de responsabilidad
+                            civil médica.,
+                            es por esto que es necesario completar esta información para continuar con tu proceso.</p>
+                    </div>
+                    <div class="form-container warning-alert">
+                        <p>Recuerda que si no cuentas con los documentos, te enviaremos un correo con un enlace para que puedas subirlos después. <br/>No olvides revisar tu bandeja de spam.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-grid">
+        <app-footer></app-footer>
+    </div>
+</div>

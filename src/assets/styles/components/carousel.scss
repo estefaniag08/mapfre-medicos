@@ -1,0 +1,105 @@
+.carousel-container {
+  width: 550px;
+}
+
+.comment-item {
+  background-color: white;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  box-shadow: var(--elevacion-3);
+  height: 150px;
+  margin: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 150px;
+}
+
+.user-icon span {
+  font-size: 3rem;
+}
+
+.puntuacion {
+  display: flex;
+}
+
+.puntuacion img {
+  width: 25px;
+  height: 25px;
+}
+
+.comment {
+  width: 310px;
+}
+
+.user-name {
+  text-align: center;
+}
+
+.comment,
+.user-name {
+  font-family: "Raleway";
+  line-height: 1.2;
+}
+
+@media screen and (min-width: 451px) and (max-width: 768px) {
+  .carousel-container {
+    min-width: 320px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .comment-item {
+    min-width: 280px;
+    max-width: 280px;
+    margin: 17px auto;
+    padding: 1rem;
+  }
+
+  .user-info {
+    max-width: 100px;
+  }
+
+  .puntuacion img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .comment p {
+    margin-bottom: 0;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .carousel-container {
+    min-width: 320px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .comment-item {
+    min-width: 280px;
+    max-width: 280px;
+    margin: 17px auto;
+    padding: 1rem;
+  }
+
+  .user-info {
+    max-width: 100px;
+  }
+
+  .puntuacion img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .comment p {
+    margin-bottom: 0;
+    font-size: 14px;
+  }
+}

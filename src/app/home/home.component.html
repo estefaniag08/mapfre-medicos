@@ -1,0 +1,111 @@
+<app-navigation (scroll)="onWindowScroll($event);" class="nav home"></app-navigation>
+<div class="background"></div>
+<div class="especialidad-container">
+    <h1>Desarrolla tu profesión médica con tranquilidad, por medio de la póliza de responsabilidad civil médica.
+    </h1>
+    <h2>Descubre todas las opciones que tenemos para ti en cotiza completamente gratis.</h2>
+    <form [formGroup]="especialidadForm" class="form-container">
+        
+        <!-- Autocomplete -->
+        <mat-form-field appearance="outline">
+            <mat-label>Especialidad</mat-label>
+            <input tab-directive type="text" placeholder="Especialidad" aria-label="Number" matInput
+                formControlName="especialidadMedico" [matAutocomplete]="especialidadAutocomplete"
+                [value]="nombreEspecialidad" (keydown)="seleccionEspecialidadEnter($event)" />
+            <mat-autocomplete #especialidadAutocomplete="matAutocomplete" (optionSelected)="escribirEspecialidad()"
+                autoActiveFirstOption>
+                <mat-option *ngFor="let especialidad of especialidadList | async" [value]="especialidad">
+                    {{especialidad.nombre_especialidad}}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-error>
+                {{errorEspecialidad()}}
+            </mat-error>
+        </mat-form-field>
+        <div>
+            <mat-checkbox formControlName="autorizacion">Acepto el <a (click)="atdp()"
+                    class="enlace-primario">tratamiento de mis datos personales </a>así como los <a (click)="terminos()"
+                    class="enlace-primario">términos y condiciones del sitio</a></mat-checkbox>
+        </div>
+        <div class="form-button-container">
+            <button mat-raised-button class="form-button" [disabled]="especialidadForm.invalid"
+                (click)="enviarEspecialidad()">SIGUIENTE</button>
+        </div>
+    </form>
+</div>
+<div class="mapfre-container home">
+    <div class="experiencias">
+        <div class="flex-container home">
+            <div class="lineas-container">
+                <div class="franja comentarios rojo"></div>
+                <div class="linea rojo"></div>
+            </div>
+            <div class="titulos-home blanco">
+                <h1 class="">Nuestros clientes</h1>
+            </div>
+            <div class="carousel-container">
+                <owl-carousel-o [options]="customOptions" class="comments">
+                    <ng-template carouselSlide *ngFor="let comment of arrayComments">
+                        <div class="comment-item">
+                            <div class="user-info">
+                                <div class="user-icon">
+                                    <span [ngClass]="comment.userIcon"></span>
+                                </div>
+                                <p class="user-name"> <strong>{{comment.userName}}</strong></p>
+                                <div class="puntuacion">
+                                    <img [src]="comment.userPuntuacion.puntuacionPath1">
+                                    <img [src]="comment.userPuntuacion.puntuacionPath2">
+                                    <img [src]="comment.userPuntuacion.puntuacionPath3">
+                                    <img [src]="comment.userPuntuacion.puntuacionPath4">
+                                    <img [src]="comment.userPuntuacion.puntuacionPath5">
+                                </div>
+                            </div>
+                            <div class="comment">
+                                <p> {{comment.userComment}} </p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+
+        </div>
+    </div>
+    <div class="flex-container home">
+        <div class="lineas-container">
+            <div class="franja beneficios amarillo"></div>
+            <div class="linea amarillo"></div>
+        </div>
+        <div class="titulos-home">
+            <h1 class="">Nuestros beneficios</h1>
+        </div>
+        <div class="white-container">
+            <div *ngFor="let ben of arrayBeneficios" class="beneficio-container">
+                <div class="beneficio-icon">
+                    <span [ngClass]="ben.icon"></span>
+                </div>
+                <div class="beneficio-descripcion">
+                    <h3 class="beneficio-subtitle"> {{ben.title}} </h3>
+                    <p class="mat-body"> {{ben.description}} </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="flex-container home">
+        <div class="lineas-container">
+            <div class="franja contacto rojo"></div>
+            <div class="linea rojo"></div>
+        </div>
+        <div class="titulos-home blanco">
+            <h1>Contáctanos</h1>
+        </div>
+        <div class="white-container contacto">
+            <h2>Atención al cliente</h2>
+            <h1>(57 - 1) 5801212</h1>
+            <p class="mat-body">contacto@alseguros.co</p>
+        </div>
+
+    </div>
+</div>
+<app-footer></app-footer>

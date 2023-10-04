@@ -1,0 +1,69 @@
+@font-face {
+  font-family: 'mapfre-medicos';
+  src:
+  url('mapfre-medicos.woff') format('woff'),
+  url('mapfre-medicos.svg') format('svg');
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="mapfre-"], [class*=" mapfre-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'mapfre-medicos' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mapfre-estetoscopio:before {
+  content: "\e90d";
+}
+.mapfre-seguro-medicos:before {
+  content: "\e90e";
+}
+.mapfre-men-icon:before {
+  content: "\e90b";
+}
+.mapfre-women-icon:before {
+  content: "\e90c";
+}
+.mapfre-email-icon:before {
+  content: "\e900";
+}
+.mapfre-fb-icon:before {
+  content: "\e901";
+}
+.mapfre-headphone-icon:before {
+  content: "\e902";
+}
+.mapfre-history-icon:before {
+  content: "\e903";
+}
+.mapfre-instagram-icon:before {
+  content: "\e904";
+}
+.mapfre-link-icon:before {
+  content: "\e905";
+}
+.mapfre-market-icon:before {
+  content: "\e906";
+}
+.mapfre-network-icon:before {
+  content: "\e907";
+}
+.mapfre-phone-icon:before {
+  content: "\e908";
+}
+.mapfre-twitter-icon:before {
+  content: "\e909";
+}
+.mapfre-whatsapp-icon:before {
+  content: "\e90a";
+}

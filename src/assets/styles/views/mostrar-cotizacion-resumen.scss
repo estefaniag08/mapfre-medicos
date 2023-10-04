@@ -1,0 +1,384 @@
+.lineas-container.cotizacion {
+  top: 350px;
+}
+
+.flex-container.cotizacion {
+  width: 100%;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.nombre-seguro p,
+.nombre-seguro h1 {
+  margin: 0;
+}
+.nombre-seguro h1 {
+  font-weight: 800;
+  line-height: 1.2;
+}
+.nombre-seguro h1:first-child {
+  font-size: 24px;
+  color: var(--gris-700);
+}
+
+.nombre-seguro h1:last-child {
+  margin-top: 10px;
+  color: var(--gris-900);
+  font-size: 26px;
+}
+
+.costo-normal-seguro p {
+  margin: 0;
+  width: 50%;
+  text-align: center;
+}
+
+.costo-normal-seguro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.cotizacion-contenedor {
+  width: 80%;
+  margin: 150px auto;
+}
+
+.form-button-container.cambiar-rc,
+.form-button-container.cotizacion {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  margin: 0;
+}
+.form-button-container.cambiar-rc button:last-child,
+.form-button-container.cotizacion button:last-child {
+  margin-top: 10px;
+}
+
+.contenedor-costos {
+  width: 360px;
+  margin: 1rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  box-shadow: var(--elevacion-3);
+}
+
+.seguro-header h2 {
+  font-weight: 700;
+  font-size: 1.7rem;
+  height: 65px;
+}
+
+.costos-seguro p {
+  margin: 2px auto;
+  text-align: center;
+}
+
+.costos-seguro {
+  display: flex;
+  flex-direction: column;
+}
+
+.costo-normal {
+  text-decoration: line-through;
+  color: #ffa407;
+  font-weight: 800;
+  font-size: 1.8rem;
+  margin: 10px 0;
+}
+
+.costo-mapfre {
+  font-size: 3rem;
+  font-weight: 600;
+  margin: 20px 0;
+  padding: 1.5rem 1rem;
+  border-radius: 3rem;
+  background-color: #ffc156;
+}
+
+.hint {
+  color: var(--gris-600);
+  margin: 0;
+  font-size: 14px;
+}
+
+.hint.documento {
+  color: black;
+  line-height: 1;
+  height: auto;
+  margin: 5px 0;
+}
+
+.costo-cuota {
+  font-weight: 800;
+  font-size: 1.8rem;
+  padding: 5px 0;
+  background-color: var(--gris-100);
+  border-radius: 3rem;
+  margin: 10px 0;
+}
+
+.detalles-content,
+.detalles-tabs,
+.detalles-header {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: var(--elevacion-3);
+}
+
+.detalles-tabs {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.subtitulo-tab {
+  margin: 0 !important;
+}
+
+.costos,
+.detalles-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-tab-body {
+  margin-top: 16px;
+}
+
+.seguro {
+  text-align: left;
+  color: var(--gris-700);
+}
+
+.cambiar-rc-input {
+  width: 100%;
+}
+
+.img-mapfre {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.logo-mapfre-seguro {
+  width: 150px;
+  margin-left: 16px;
+}
+
+/* RESUMEN */
+
+.step-grid.resumen {
+  grid-template-rows: 150px calc(100vh - 200px) 150px auto;
+}
+
+.icono-resumen {
+  font-size: 4rem;
+  color: var(--rojo-primario);
+}
+
+.nota-resumen {
+  margin-top: 1rem;
+  background-color: var(--amarillo-100);
+}
+
+.nota-resumen h2,
+.nota-resumen ul,
+.nota-resumen p {
+  margin: 0;
+  color: var(--amarillo-900);
+}
+
+.nota-resumen h2 {
+  font-weight: 800;
+}
+
+.warning-alert {
+  background-color: var(--amarillo-100);
+  border-radius: 3px;
+  padding: 14px;
+  margin: 12px 0;
+  color: var(--amarillo-900);
+  border-left: 5px solid var(--amarillo-900);
+}
+
+.warning-alert p {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.warning-alert p::before{
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  content: "\e001";
+  margin-right: 12px;
+  font-size: 24px;
+}
+
+@media screen and (min-width: 401px) and (max-width: 768px) {
+  .costo-seguro {
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
+  }
+
+  .costo-total {
+    margin-left: 0.32rem;
+  }
+  .valor-seguro-alseguros {
+    align-items: flex-start;
+  }
+
+  .cuotas-text,
+  .valor-cuota {
+    text-align: center;
+  }
+
+  .valor-cuota {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .table {
+    border: none;
+    width: 300px;
+  }
+
+  .table,
+  .table caption,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    text-align: left;
+  }
+
+  .table thead,
+  .table th,
+  .table tr:first-child {
+    display: none;
+    visibility: hidden;
+  }
+
+  .table tr {
+    background-color: white;
+    margin-bottom: 8px;
+    border: 1px solid var(--gris-200);
+  }
+
+  .table td:nth-child(2n + 1),
+  .table tr,
+  .table td {
+    width: 280px;
+    text-align: left;
+  }
+
+  .table th,
+  .table td {
+    border: none;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 768px) {
+  .costo-normal-seguro.desktop {
+    display: none;
+  }
+
+  .costo-normal-seguro.mobile {
+    width: 100%;
+  }
+  .cotizacion-contenedor {
+    width: 95%;
+    margin: 75px auto 10px auto;
+  }
+
+  .lineas-container.cotizacion {
+    top: 220px;
+  }
+
+  .lineas-container.cotizacion > .franja {
+    height: 3rem;
+  }
+
+  .nombre-seguro h1 {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .contenedor-seguro {
+    width: 300px;
+  }
+
+  .detalle-seguros-container {
+    margin: 0 15px;
+    height: 150px;
+  }
+
+  .costo-mapfre {
+    font-size: 2.3rem;
+  }
+
+  .costos {
+    justify-content: center;
+  }
+
+  .detalles-tabs {
+    width: 600px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .img-mapfre {
+    margin-top: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nombre-seguro h1:first-child {
+    font-size: 20px;
+    white-space: nowrap;
+  }
+  
+  .nombre-seguro h1:last-child {
+    font-size: 24px;
+  }
+
+  .logo-mapfre-seguro {
+    width: 110px;
+    margin-left: 0;
+    margin-top: 5px;
+  }
+
+  .seguro {
+    display: none;
+  }
+
+  .cotizacion-contenedor {
+    width: 95%;
+    margin: 55px auto 10px auto;
+  }
+  .detalles-tabs {
+    width: 320px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .detalles-tabs {
+    width: 270px;
+    margin: 0 auto;
+  }
+}

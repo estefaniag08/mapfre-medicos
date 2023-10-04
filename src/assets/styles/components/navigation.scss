@@ -1,0 +1,120 @@
+nav {
+  background-color: var(--rojo-primario);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  transition: all 0.5s ease-in-out;
+}
+
+.nav.home nav {
+  background-color: transparent;
+}
+
+.navigation-container {
+  border-radius: 0 0 0 4rem;
+}
+
+.navigation-content {
+  display: flex;
+  max-width: 80vw;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.navigation-icons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 350px;
+}
+
+.navigation-icons-container a {
+  color: white;
+}
+
+.navigation-mail {
+  font-size: 1.5rem;
+  text-decoration: underline;
+}
+
+.navigation-icon {
+  font-size: 3rem;
+  text-decoration: none;
+}
+
+.mail,
+.phone {
+  display: none;
+}
+
+.home-logo {
+  width: 15%;
+  background-image: url("../../img/logo-negativo.svg");
+  height: 45px;
+  background-repeat: no-repeat;
+  display: flex;
+  //justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: 900;
+  color: white;
+  text-decoration: none;
+}
+
+.background-red {
+  background-color: var(--rojo-primario) !important;
+  transition: all 0.8s ease-in-out;
+  box-shadow: var(--elevacion-4);
+}
+
+@media screen and (min-width: 451px) and (max-width: 768px) {
+  .home-logo {
+    width: 700px;
+    height: 30px;
+  }
+
+  .navigation-content {
+    min-width: 90%;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  nav {
+    width: 100vw;
+  }
+  .navigation-content {
+    min-width: 95vw;
+    max-width: 95vw;
+    margin: 0 auto;
+    flex-direction: row-reverse;
+  }
+  .home-logo {
+    width: 150px;
+    height: 35px;
+  }
+
+  .mail,
+  .phone {
+    display: block;
+  }
+
+  .navigation-mail {
+    display: none;
+  }
+
+  .navigation-icons-container {
+    width: 40%;
+    flex-direction: row-reverse;
+  }
+
+  .navigation-icon {
+    font-size: 2.5rem;
+  }
+}

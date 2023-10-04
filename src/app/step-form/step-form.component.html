@@ -1,0 +1,208 @@
+<app-navigation></app-navigation>
+<div class="step-grid">
+    <div class="lineas-container step">
+        <div class="linea step amarillo"></div>
+        <div class="franja step amarillo"></div>
+    </div>
+    <mat-horizontal-stepper linear #stepper class="step-form">
+        <mat-step [stepControl]="profesion">
+            <h1>Tu profesión</h1>
+            <form [formGroup]="profesion" class="form-container">
+                <mat-form-field appearance="outline" required>
+                    <mat-label>Tipo de procedimiento</mat-label>
+                    <mat-select formControlName="tipoMedico" (change)="limpiarRc()">
+                    <mat-option *ngFor="let tipoMedico of tipoMedicos"  (click)="obtenerRcPorClase()" 
+                            [value]="tipoMedico.clase_medico">
+                            {{tipoMedico.clase_medico.nombre_clase}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint align="end"> <a type="button" (click)="mostrarTextoTipoProcedimiento()">¿Qué tipo de procedimiento escojo?</a></mat-hint>
+                    <mat-error>
+                        {{errorSeleccion()}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" required>
+                    <mat-label>Valor asegurado</mat-label>
+                    <mat-select formControlName="valorAsegurado">
+                        <mat-option *ngFor="let valor of valorAsegurado" [value]="valor.id_clase_rc_medico">
+                            {{valor.rc_medico.numero_rc_medico | currency : '$' : 'symbol' : '1.0-0' }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint align="end"> <a type="button" (click)="mostrarTextoValorAsegurado()">¿Qué es esto?</a></mat-hint>
+                    <mat-error>
+                        {{errorSeleccion()}}
+                    </mat-error>
+                </mat-form-field>
+                <div class="form-button-container">
+                    <button mat-raised-button class="form-button" matStepperNext [disabled]="profesion.invalid"
+                        (click)="enviarProfesionForm()">SIGUIENTE</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="sobreTi">
+            <h1>Cuéntanos sobre ti</h1>
+            <form [formGroup]="sobreTi" class="form-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombres</mat-label>
+                    <input matInput placeholder="Nombres" formControlName="nombresMedico" required>
+                    <mat-error>
+                        {{errorNombre()}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Apellidos</mat-label>
+                    <input matInput placeholder="Apellidos" formControlName="apellidosMedico" required>
+                    <mat-error>
+                        {{errorApellido()}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput [matDatepicker]="calendarIcon" [min]="minDate" [max]="maxDate"
+                        formControlName="fechaNacimiento" placeholder="DD/MM/AAAA" required>
+                    <mat-datepicker-toggle matSuffix [for]="calendarIcon"></mat-datepicker-toggle>
+                    <mat-datepicker #calendarIcon [startAt]="maxDate"></mat-datepicker>
+                    <mat-error> {{ errorFecha() }} </mat-error>
+                    <mat-error *ngIf="this.sobreTi.controls['fechaNacimiento'].hasError">
+                        Debes se mayor de edad para cotizar con nosotros
+                    </mat-error>
+                    <mat-error *ngIf="this.sobreTi.controls['fechaNacimiento'].hasError('required')">
+                        Selecciona tu fecha de nacimiento para continuar
+                    </mat-error>
+                </mat-form-field>
+                <div class="custom-radio">
+                    <mat-label>Género</mat-label>
+                    <div class="custom-radio-options">
+                        <label class="custom-radio-container">
+                            <input type="radio" name="genero" formControlName="genero" value="1"
+                                class="custom-radio-input">
+                            <span class="custom-radio-content custom-radio-masculino"></span>
+                        </label>
+                        <label class="custom-radio-container">
+                            <input type="radio" name="genero" formControlName="genero" value="2"
+                                class="custom-radio-input">
+                            <span class="custom-radio-content custom-radio-femenino"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-button-container">
+                    <button mat-raised-button class="form-button" matStepperNext [disabled]="sobreTi.invalid"
+                        (click)="enviarSobreTiForm()">SIGUIENTE</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="contacto">
+            <h1>Déjanos contactarte</h1>
+            <form [formGroup]="contacto" class="form-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Número celular</mat-label>
+                    <input (keydown)="bloquearLetras($event)" matInput placeholder="Número de celular" formControlName="numeroCelular" required>
+                    <mat-error>
+                        {{errorCelular()}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Correo Electrónico</mat-label>
+                    <input matInput placeholder="Correo Electrónico" formControlName="correo" type="email" required >
+                    <mat-error>
+                        {{errorCorreo()}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirma tu correo</mat-label>
+                    <input paste-directive matInput placeholder="Confirma tu correo"  type="email"
+                        formControlName="confirmacionCorreo" (blur)="validarConfirmacionCorreo()" required>
+                    
+                        <mat-error> {{errorConfirmacionCorreo()}}  </mat-error>
+                        <mat-error> {{validarConfirmacionCorreo ()}} </mat-error>
+                    
+                </mat-form-field>
+                <div class="form-button-container">
+                    <button mat-raised-button class="form-button" matStepperNext [disabled]="contacto.invalid"
+                        (click)="enviarContactoForm()">SIGUIENTE</button>
+                </div>
+            </form>
+
+        </mat-step>
+    </mat-horizontal-stepper>
+    <div class="detalles-container">
+        <div class="aclaraciones-container">
+            <div class="aclaraciones-text profesion">
+                <div *ngIf="mostrarTextoPasoUno">
+                    <div class="general" *ngIf="mostrarTextoGeneral">
+                        <h2>¿Por qué me piden estos datos?</h2>
+                        <p>Es de vital importancia conocer qué tipo de procedimiento practicas como profesional de la salud,
+                            adicionalmente debes seleccionar un valor asegurado con el cual te sientas cómodo o el valor que
+                            el
+                            centro médico
+                            te solicita.</p>
+                    </div>
+                    <div class="tipo-procedimiento" *ngIf="mostrarTipoProcedimientoText">
+                        <h2>¿Por qué me piden estos datos?</h2>
+                        <h3>Estos son algunos de los procedimientos</h3>
+                        <ul>
+                            <li><strong>Sin Cirugía: </strong>En caso de realizar solo consultas.</li>
+                            <li><strong>Cirugía Menor:</strong> Incluye las cirugías no clasificadas como
+                                Cirugía Mayor.
+                                <p>También incluye</p>
+                                <ol>
+                                    <li>Procesos obstétricos no considerados como Cirugía Mayor</li>
+                                    <li>La asistencia a otros médicos en cirugías a pacientes propios.</li>
+                                </ol>
+                            </li>
+                            <li>
+                                Biopsia por Punción: Incluye pulmones, hígado, riñones y próstata, pero no incluye médula
+                                ósea.
+                            </li>
+                            <li>
+                                Cauterización <strong>NO</strong> incluye:
+                                <ol>
+                                    <li>Inserción ocasional y por emergencia de catéteres para registrar presión o
+                                        marcapasos
+                                        temporales.</li>
+                                    <li>
+                                        Cauterización de la uretra.
+                                    </li>
+                                    <li>
+                                        Cauterización del cordón umbilical para propósitos de diagnóstico, o para monitorear
+                                        gases en
+                                        la sangre de recién nacidos que están recibiendo oxígeno.
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                Procedimientos menores y mayores: Se incluyen procedimientos clasificados tanto como
+                                en cirugía menor y cirugía mayor.
+                            </li>
+                            <li>
+                                Cirugía mayor: Incluye operaciones en o sobre cualquier cavidad corporal, incluyendo,
+                                pero no limitándose al cráneo, tórax, abdomen, o pelvis, o cualquier otra operación que,
+                                debido a la condición del paciente, o al tiempo, o a las circunstancias de la operación,
+                                presente un peligro marcado a la vida. También incluye remoción de cualquier glándula u
+                                órgano, remoción de tumores, amputaciones, fracturas de huesos, cirugía plástica y
+                                cualquier operación efectuada utilizando anestesia general.
+                                Serán también consideradas como cirugía mayor las cesáreas, las anexectomías y las
+                                amigdalectomías (tonsilectomías).
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="valor-aegurado" *ngIf="mostrarValorAseguradoText">
+                        <h2>¿Por qué me piden estos datos?</h2>
+                        <p>
+                            Es el monto con el cual quedara asegurado en caso de una futura reclamación, este valor incluye
+                            responsabilidad civil en actos médicos, gastos de defensa y responsabilidad civil en caso de
+                            auxilio.
+                        </p>
+                        <p>
+                            Este monto lo puede escoger el profesional de la salud según lo prefiera o en casos particulares
+                            este será definido por el hospital o centro medico con el cual vaya a trabajar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-grid">
+        <app-footer></app-footer>
+    </div>
+</div>

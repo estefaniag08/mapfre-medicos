@@ -1,0 +1,62 @@
+<app-navigation></app-navigation>
+<div class="step-grid resumen">
+    <div class="lineas-container resumen">
+        <div class="linea step amarillo"></div>
+        <div class="franja step amarillo"></div>
+    </div>
+    <div class="step-form">
+        <h1>Resumen</h1>
+        <h3>Estos son los datos de tu cotización</h3>
+        <div class="resumen-container form-container resumen">
+            <div class="resumen-section resumen-section-uno">
+                <span class="mapfre-men-icon icono-resumen"></span>
+                <p>{{informacionR?.poliza.cliente.persona.nombre}} {{informacionR?.poliza.cliente.persona.apellidos}}</p>
+                <p>Documento: {{informacionR?.poliza.cliente.persona.id_persona}}</p>
+                <p>Contacto: <span>{{informacionR?.poliza.cliente.celular}}</span> </p>
+            </div>
+            <div class="resumen-section resumen-section-dos">
+                <span class="mapfre-estetoscopio icono-resumen"></span>
+                <p>Especialidad: {{informacionR?.especialidad_medico.nombre_especialidad}}</p>
+                <p>{{informacionR?.clase_rc_medico.clase_medico.nombre_clase}}</p>
+                <p>Lugar de trabajo: {{informacionR?.hospital}} en {{informacionR?.ciudad.nombre_ciudad}},
+                    {{informacionR?.ciudad.departamento}}</p>
+            </div>
+            <div class="resumen-section">
+                <span class="mapfre-seguro-medicos icono-resumen"></span>
+                <p>Póliza de responsabilidad civil médica MAPFRE</p>
+                <p>{{informacionR?.clase_rc_medico.valor_rc | currency : '$' : 'symbol' : '1.0-0' }}</p>
+            </div>
+        </div>
+        <div class="form-container nota-resumen">
+            <h2>IMPORTANTE:</h2>
+            <p>Recuerda que una vez recibas tu referencia de pago, podrás <strong>finalizar la compra</strong> de tu póliza a través de:</p>
+            <ul>
+                <li>PSE</li>
+                <li>Recibo de pago en entidad bancaria</li>
+                <li>Puntos Baloto o Efecty</li>
+            </ul>
+            <button (click)="volverAlInicio()" mat-raised-button class="btn-primary home-btn">VOLVER AL INICIO</button>
+        </div>
+    </div>
+
+    <div class="detalles-container">
+        <div class="aclaraciones-container">
+            <div class="aclaraciones-text profesion">
+                <div>
+                    <div class="general">
+                        <h2>Gracias por preferirnos</h2>
+                        <p>Dentro de poco recibirás un <strong>Correo electrónico</strong>  con todos los detalles de tu cotización. No dudes en
+                            comunicarte al
+                            580 1212 en caso de tener alguna duda.</p>
+                    </div>
+                    <div class="form-container warning-alert">
+                        <p>No olvides revisar en tu bandeja de spam</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-grid">
+        <app-footer></app-footer>
+    </div>
+</div>
