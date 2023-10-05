@@ -40,6 +40,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { PasteDirective } from './step-form/paste-directive';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { FormularioCotizacionModule } from './formularios-medicos/formulario-cotizacion/formulario-cotizacion.module';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { ErrorpageComponent } from './errorpage/errorpage.component';
     MatTooltipModule,
     MatToolbarModule,
     MatCardModule,
-    CarouselModule
+    CarouselModule,
+    FormularioCotizacionModule
   ],
   providers: [CurrencyPipe],
 
