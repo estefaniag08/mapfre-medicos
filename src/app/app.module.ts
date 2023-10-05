@@ -1,7 +1,7 @@
 // Angular
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule}  from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CurrencyPipe } from '@angular/common';
@@ -40,9 +40,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { PasteDirective } from './step-form/paste-directive';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
-import { FormularioCotizacionComponent } from './formularios-medicos/formulario-cotizacion/formulario-cotizacion.component';
-import { PasoEspecialidadComponent } from './formularios-medicos/formulario-cotizacion/paso-especialidad/paso-especialidad.component';
-import { PasoContactoComponent } from './formularios-medicos/formulario-cotizacion/paso-contacto/paso-contacto.component';
 
 
 @NgModule({
@@ -59,9 +56,6 @@ import { PasoContactoComponent } from './formularios-medicos/formulario-cotizaci
     FooterComponent,
     PasteDirective,
     ErrorpageComponent,
-    FormularioCotizacionComponent,
-    PasoEspecialidadComponent,
-    PasoContactoComponent
   ],
   imports: [
     BrowserModule,
@@ -69,13 +63,28 @@ import { PasoContactoComponent } from './formularios-medicos/formulario-cotizaci
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule, 
-    MatFormFieldModule, MatSelectModule, MatAutocompleteModule, 
-    MatInputModule, MatButtonModule, MatStepperModule, MatDatepickerModule, ClipboardModule, MatTabsModule, MatIconModule,
-    MatMomentDateModule, MatRadioModule, MatDialogModule, MatCheckboxModule, MatTooltipModule, MatToolbarModule, MatCardModule, CarouselModule ,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatButtonModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    ClipboardModule,
+    MatTabsModule,
+    MatIconModule,
+    MatMomentDateModule,
+    MatRadioModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatToolbarModule,
+    MatCardModule,
+    CarouselModule
   ],
   providers: [CurrencyPipe],
-  
-  bootstrap: [AppComponent]
+
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
