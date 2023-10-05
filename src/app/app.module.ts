@@ -40,6 +40,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { PasteDirective } from './step-form/paste-directive';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { FormularioCotizacionComponent } from './formularios-medicos/formulario-cotizacion/formulario-cotizacion.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ErrorpageComponent } from './errorpage/errorpage.component';
     FooterComponent,
     PasteDirective,
     ErrorpageComponent,
+    FormularioCotizacionComponent,
   ],
   imports: [
     BrowserModule,
