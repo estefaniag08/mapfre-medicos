@@ -41,6 +41,8 @@ import { FooterComponent } from './footer/footer.component';
 import { PasteDirective } from './step-form/paste-directive';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { FormularioCotizacionComponent } from './formularios-medicos/formulario-cotizacion/formulario-cotizacion.component';
+import { PasoEspecialidadComponent } from './formularios-medicos/formulario-cotizacion/paso-especialidad/paso-especialidad.component';
+import { PasoContactoComponent } from './formularios-medicos/formulario-cotizacion/paso-contacto/paso-contacto.component';
 
 
 @NgModule({
@@ -58,6 +60,8 @@ import { FormularioCotizacionComponent } from './formularios-medicos/formulario-
     PasteDirective,
     ErrorpageComponent,
     FormularioCotizacionComponent,
+    PasoEspecialidadComponent,
+    PasoContactoComponent
   ],
   imports: [
     BrowserModule,

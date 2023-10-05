@@ -1,1 +1,61 @@
 <p>paso-especialidad works!</p>
+<form [formGroup]="especialidadForm" class="form-container">
+        
+    <!-- Autocomplete -->
+    <mat-form-field appearance="outline">
+        <mat-label>Especialidad</mat-label>
+        <input tab-directive type="text" placeholder="Especialidad" aria-label="Number" matInput
+            formControlName="especialidadMedico" [matAutocomplete]="especialidadAutocomplete"
+            [value]="nombreEspecialidad" (keydown)="seleccionEspecialidadEnter($event)" />
+        <mat-autocomplete #especialidadAutocomplete="matAutocomplete" (optionSelected)="escribirEspecialidad()"
+            autoActiveFirstOption>
+            <mat-option *ngFor="let especialidad of especialidadList | async" [value]="especialidad">
+                {{especialidad.nombre_especialidad}}
+            </mat-option>
+        </mat-autocomplete>
+        <mat-error>
+            {{errorEspecialidad()}}
+        </mat-error>
+    </mat-form-field>
+    <div>
+        <mat-checkbox formControlName="autorizacion">Acepto el <a (click)="atdp()"
+                class="enlace-primario">tratamiento de mis datos personales </a>así como los <a (click)="terminos()"
+                class="enlace-primario">términos y condiciones del sitio</a></mat-checkbox>
+    </div>
+    <div class="form-button-container">
+        <button mat-raised-button class="form-button" [disabled]="especialidadForm.invalid"
+            (click)="enviarEspecialidad()">SIGUIENTE</button>
+    </div>
+
+    <!--Agregado de "Tu Profesión"-->
+    
+    <mat-form-field appearance="outline" required>
+        <mat-label>Tipo de procedimiento</mat-label>
+        <mat-select formControlName="tipoMedico" (change)="limpiarRc()">
+        <mat-option *ngFor="let tipoMedico of tipoMedicos"  (click)="obtenerRcPorClase()" 
+                [value]="tipoMedico.clase_medico">
+                {{tipoMedico.clase_medico.nombre_clase}}
+            </mat-option>
+        </mat-select>
+        <mat-hint align="end"> <a type="button" (click)="mostrarTextoTipoProcedimiento()">¿Qué tipo de procedimiento escojo?</a></mat-hint>
+        <mat-error>
+            {{errorSeleccion()}}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" required>
+        <mat-label>Valor asegurado</mat-label>
+        <mat-select formControlName="valorAsegurado">
+            <mat-option *ngFor="let valor of valorAsegurado" [value]="valor.id_clase_rc_medico">
+                {{valor.rc_medico.numero_rc_medico | currency : '$' : 'symbol' : '1.0-0' }}
+            </mat-option>
+        </mat-select>
+        <mat-hint align="end"> <a type="button" (click)="mostrarTextoValorAsegurado()">¿Qué es esto?</a></mat-hint>
+        <mat-error>
+            {{errorSeleccion()}}
+        </mat-error>
+    </mat-form-field>
+    <div class="form-button-container">
+        <button mat-raised-button class="form-button" matStepperNext [disabled]="profesion.invalid"
+            (click)="enviarProfesionForm()">SIGUIENTE</button>
+    </div>
+</form>
