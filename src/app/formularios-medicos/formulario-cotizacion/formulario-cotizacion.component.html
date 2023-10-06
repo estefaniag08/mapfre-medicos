@@ -1,3 +1,4 @@
 <p>formulario-cotizacion works!</p>
-<app-paso-contacto></app-paso-contacto>
-<app-paso-especialidad></app-paso-especialidad>
+
+<app-paso-contacto *ngIf="!mostrarFormularioEspecialidad"></app-paso-contacto>
+<app-paso-especialidad *ngIf="mostrarFormularioEspecialidad"></app-paso-especialidad>

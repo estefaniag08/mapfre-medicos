@@ -20,6 +20,8 @@ import { map, startWith } from 'rxjs/operators';
 
 import { RCMedico, ClaseMedico } from './../../../interfaces/PolizaMedConsultas';
 
+import { FormularioCotizacionComponent } from './../formulario-cotizacion.component';
+
 declare global {
   interface Window { dataLayer: any[]; }
 }
@@ -42,7 +44,8 @@ export class PasoEspecialidadComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private medicoConsultaServ: ConsultasPolizaMedicoService
+    private medicoConsultaServ: ConsultasPolizaMedicoService,
+    private formularioMedicos: FormularioCotizacionComponent
   ) {}
   
   /**
@@ -72,6 +75,8 @@ export class PasoEspecialidadComponent implements OnInit {
   mostrarTipoProcedimientoText: boolean = false;
   mostrarValorAseguradoText: boolean = false;
   mostrarTextoPasoUno: boolean = true;
+
+  
 
   /**
    * @description Array de tipo de médicos en BD
@@ -291,8 +296,7 @@ export class PasoEspecialidadComponent implements OnInit {
   
   /**
    * @method
-   * @description Permite imprimir los mensajes de error, cuando los campos del formulario no cumplen con las validaciones
-   * @returns Mensajes de error que se imprimirán en HTML bajo el campo de comentario
+   * @description Realiza la consulta al api de los tipos de procedimiento por especialidad
    */
   obtenerTiposDeProcedimientoPorEspecialidad(){
     this.medicoConsultaServ.getClasesPorEspecialidad().subscribe((clases) => {
@@ -300,6 +304,30 @@ export class PasoEspecialidadComponent implements OnInit {
         this.tipoMedicos.push(clases[i]);
       }
     });
+  }
+
+  /**
+   * @method
+   * @description Guarda los datos de del formulario en la base de datos
+   * (realiza las verificaciones pertinentes para el guardado)
+   */
+
+  confirmarFormularioEspecialidad(){
+    if(this.especialidadForm.invalid){
+      
+    }else{
+      this.enviarEspecialidad();
+      this.enviarProfesionForm();
+      this.cambiarFormularioDeEspecialidadPorContacto();
+    }
+  }
+
+  /**
+   * @method
+   * @description Gestiona el estado del cambio de formularios
+   */
+  cambiarFormularioDeEspecialidadPorContacto(){
+    this.formularioMedicos.setMostrarFormularioEspecialidad(false);
   }
 }
 // COMPONENTE DE TÉRMINOS Y CONDICIONES DEL SITIO

@@ -17,15 +17,7 @@
             {{errorEspecialidad()}}
         </mat-error>
     </mat-form-field>
-    <div>
-        <mat-checkbox formControlName="autorizacion">Acepto el <a (click)="atdp()"
-                class="enlace-primario">tratamiento de mis datos personales </a>así como los <a (click)="terminos()"
-                class="enlace-primario">términos y condiciones del sitio</a></mat-checkbox>
-    </div>
-    <div class="form-button-container">
-        <button mat-raised-button class="form-button" [disabled]="especialidadForm.valid"
-            (click)="enviarEspecialidad()">SIGUIENTE</button>
-    </div>
+    
 
     <!--Agregado de "Tu Profesión"-->
     
@@ -54,8 +46,13 @@
             {{errorSeleccion()}}
         </mat-error>
     </mat-form-field>
+    <div>
+        <mat-checkbox formControlName="autorizacion">Acepto el <a (click)="atdp()"
+                class="enlace-primario">tratamiento de mis datos personales </a>así como los <a (click)="terminos()"
+                class="enlace-primario">términos y condiciones del sitio</a></mat-checkbox>
+    </div>
     <div class="form-button-container">
         <button mat-raised-button class="form-button" matStepperNext [disabled]="especialidadForm.invalid"
-            (click)="enviarProfesionForm()">SIGUIENTE</button>
+            (click)="confirmarFormularioEspecialidad()">SIGUIENTE</button>
     </div> 
 </form>
