@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormularioCotizacionComponent } from './formulario-cotizacion.component';
@@ -27,6 +28,7 @@ import { FormularioCotizacionComponent } from './formulario-cotizacion.component
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
+    MatInputModule
   ],
   exports: [FormularioCotizacionComponent],
 })

@@ -10,6 +10,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [],
@@ -23,7 +24,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    CarouselModule
-  ]
+    CarouselModule,
+    MatInputModule,
+  ],
 })
 export class HomeModule {}

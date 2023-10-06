@@ -86,6 +86,8 @@ export class PasoEspecialidadComponent implements OnInit {
     this.especialidadForm = this.formBuilder.group({
       especialidadMedico: ['', Validators.required],
       autorizacion: ['', Validators.required],
+      tipoMedico: ['', Validators.required],
+      valorAsegurado: ['', Validators.required],
     });
 
     /**
@@ -122,15 +124,15 @@ export class PasoEspecialidadComponent implements OnInit {
       /**
         * @description Declaración de campos para cada formulario y sus validaciones
         */
-      this.profesion = this.formBuilder.group({
+      /*this.profesion = this.formBuilder.group({
         tipoMedico: ['', Validators.required],
         valorAsegurado: ['', Validators.required],
-      });
-      this.medicoConsultaServ.getClasesPorEspecialidad().subscribe((clases) => {
+      });*/
+      /*this.medicoConsultaServ.getClasesPorEspecialidad().subscribe((clases) => {
         for (let i = 0; i < clases.length; i++) {
           this.tipoMedicos.push(clases[i]);
         }
-      });
+      });*/
 
   }
 
@@ -174,7 +176,7 @@ export class PasoEspecialidadComponent implements OnInit {
    * @description Permite enviar la especialidad del médico siempre y cuando haya sido seleccionada
    */
   enviarEspecialidad() {
-    if (this.especialidadForm.invalid) {
+    if (this.especialidadForm.valid) {
       
     } else {
             //Evento personalizado google tag
@@ -188,7 +190,8 @@ export class PasoEspecialidadComponent implements OnInit {
           .id_especialidad_medico, this.especialidadForm.controls['especialidadMedico'].value
           .nombre_especialidad
       );
-      this.router.navigate(['cotizacion'], { relativeTo: this.route.parent });
+      this.obtenerTiposDeProcedimientoPorEspecialidad();
+      //this.router.navigate(['cotizacion'], { relativeTo: this.route.parent });
     }
   }
   /**
@@ -227,7 +230,7 @@ export class PasoEspecialidadComponent implements OnInit {
   //Sin descripción UnU
   obtenerRcPorClase() {
     this.medicoConsultaServ
-      .getRCPorClase(this.profesion.controls['tipoMedico'].value.id_clase_medico)
+      .getRCPorClase(this.especialidadForm.controls['tipoMedico'].value.id_clase_medico)
       .subscribe((rc) => {
         this.medicoConsultaServ.setArregloValoresRc(rc);
         this.valorAsegurado = [];
@@ -239,25 +242,25 @@ export class PasoEspecialidadComponent implements OnInit {
 
   //Sin descripción UnU
   enviarProfesionForm() {
-    if (this.profesion.invalid) {
+    if (this.especialidadForm.invalid) {
 
     } else {
       //Evento personalizado google tag
       window.dataLayer.push({
         event: 'clase_seleccionada',
-        clase: this.profesion.controls['tipoMedico'].value.nombre_clase
+        clase: this.especialidadForm.controls['tipoMedico'].value.nombre_clase
       });
       //Evento personalizado google tag
-      let index = this.valorAsegurado.findIndex(valor => valor.id_clase_rc_medico === this.profesion.controls['valorAsegurado'].value)
+      let index = this.valorAsegurado.findIndex(valor => valor.id_clase_rc_medico === this.especialidadForm.controls['valorAsegurado'].value)
       console.log(index)
       window.dataLayer.push({
         event: 'rc_seleccionado',
         rc: this.valorAsegurado[index].rc_medico.numero_rc_medico
       });
 
-      this.medicoConsultaServ.setClaseNomb(this.profesion.controls['tipoMedico'].value.nombre_clase)
+      this.medicoConsultaServ.setClaseNomb(this.especialidadForm.controls['tipoMedico'].value.nombre_clase)
       this.medicoConsultaServ.setClaseRc(
-        this.profesion.controls['valorAsegurado'].value
+      this.especialidadForm.controls['valorAsegurado'].value
       );
       this.mostrarTextoPasoUno = false;
     }
@@ -286,6 +289,18 @@ export class PasoEspecialidadComponent implements OnInit {
     return 'Debes seleccionar una opción para continuar';
   }
   
+  /**
+   * @method
+   * @description Permite imprimir los mensajes de error, cuando los campos del formulario no cumplen con las validaciones
+   * @returns Mensajes de error que se imprimirán en HTML bajo el campo de comentario
+   */
+  obtenerTiposDeProcedimientoPorEspecialidad(){
+    this.medicoConsultaServ.getClasesPorEspecialidad().subscribe((clases) => {
+      for (let i = 0; i < clases.length; i++) {
+        this.tipoMedicos.push(clases[i]);
+      }
+    });
+  }
 }
 // COMPONENTE DE TÉRMINOS Y CONDICIONES DEL SITIO
 

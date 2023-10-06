@@ -9,7 +9,7 @@
             [value]="nombreEspecialidad" (keydown)="seleccionEspecialidadEnter($event)" />
         <mat-autocomplete #especialidadAutocomplete="matAutocomplete" (optionSelected)="escribirEspecialidad()"
             autoActiveFirstOption>
-            <mat-option *ngFor="let especialidad of especialidadList | async" [value]="especialidad">
+            <mat-option *ngFor="let especialidad of especialidadList | async" [value]="especialidad" (click)="enviarEspecialidad()">
                 {{especialidad.nombre_especialidad}}
             </mat-option>
         </mat-autocomplete>
@@ -23,7 +23,7 @@
                 class="enlace-primario">términos y condiciones del sitio</a></mat-checkbox>
     </div>
     <div class="form-button-container">
-        <button mat-raised-button class="form-button" [disabled]="especialidadForm.invalid"
+        <button mat-raised-button class="form-button" [disabled]="especialidadForm.valid"
             (click)="enviarEspecialidad()">SIGUIENTE</button>
     </div>
 
@@ -55,7 +55,7 @@
         </mat-error>
     </mat-form-field>
     <div class="form-button-container">
-        <button mat-raised-button class="form-button" matStepperNext [disabled]="profesion.invalid"
+        <button mat-raised-button class="form-button" matStepperNext [disabled]="especialidadForm.invalid"
             (click)="enviarProfesionForm()">SIGUIENTE</button>
-    </div>
+    </div> 
 </form>
