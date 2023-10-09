@@ -1,6 +1,5 @@
-<p>paso-contacto works!</p>
 <h1>Cuéntanos sobre ti</h1>
-<form [formGroup]="sobreTi" class="form-container">
+<form [formGroup]="contacto" class="form-container">
     <mat-form-field appearance="outline">
         <mat-label>Nombres</mat-label>
         <input matInput placeholder="Nombres" formControlName="nombresMedico" required>
@@ -14,36 +13,33 @@
         <mat-error>
             {{errorApellido()}}
         </mat-error>
+    </mat-form-field> 
+    <!-- traido de step-form -->
+    <mat-form-field appearance="outline">
+        <mat-label>Número celular</mat-label>
+        <input (keydown)="bloquearLetras($event)" matInput placeholder="Número de celular" formControlName="numeroCelular" required>
+        <mat-error>
+            {{errorCelular()}}
+        </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
-        <mat-label>Fecha de nacimiento</mat-label>
-        <input matInput [matDatepicker]="calendarIcon" [min]="minDate" [max]="maxDate" formControlName="fechaNacimiento"
-            placeholder="DD/MM/AAAA" required>
-        <mat-datepicker-toggle matSuffix [for]="calendarIcon"></mat-datepicker-toggle>
-        <mat-datepicker #calendarIcon [startAt]="maxDate"></mat-datepicker>
-        <mat-error> {{ errorFecha() }} </mat-error>
-        <mat-error *ngIf="this.sobreTi.controls['fechaNacimiento'].hasError">
-            Debes se mayor de edad para cotizar con nosotros
-        </mat-error>
-        <mat-error *ngIf="this.sobreTi.controls['fechaNacimiento'].hasError('required')">
-            Selecciona tu fecha de nacimiento para continuar
+        <mat-label>Correo Electrónico</mat-label>
+        <input matInput placeholder="Correo Electrónico" formControlName="correo" type="email" required >
+        <mat-error>
+            {{errorCorreo()}}
         </mat-error>
     </mat-form-field>
-    <div class="custom-radio">
-        <mat-label>Género</mat-label>
-        <div class="custom-radio-options">
-            <label class="custom-radio-container">
-                <input type="radio" name="genero" formControlName="genero" value="1" class="custom-radio-input">
-                <span class="custom-radio-content custom-radio-masculino"></span>
-            </label>
-            <label class="custom-radio-container">
-                <input type="radio" name="genero" formControlName="genero" value="2" class="custom-radio-input">
-                <span class="custom-radio-content custom-radio-femenino"></span>
-            </label>
-        </div>
-    </div>
+    <mat-form-field appearance="outline">
+        <mat-label>Confirma tu correo</mat-label>
+        <input paste-directive matInput placeholder="Confirma tu correo"  type="email"
+            formControlName="confirmacionCorreo" (blur)="validarConfirmacionCorreo()" required>
+        
+            <mat-error> {{errorConfirmacionCorreo()}}  </mat-error>
+            <mat-error> {{validarConfirmacionCorreo ()}} </mat-error>
+        
+    </mat-form-field>
     <div class="form-button-container">
-        <button mat-raised-button class="form-button" matStepperNext [disabled]="sobreTi.invalid"
+        <button mat-raised-button class="form-button" matStepperNext [disabled]="contacto.invalid"
             (click)="enviarSobreTiForm()">SIGUIENTE</button>
     </div>
 </form>
