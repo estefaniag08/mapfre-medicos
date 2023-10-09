@@ -18,18 +18,23 @@ import { EspecialidadMedico } from './../../../interfaces/PolizaMedConsultas';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
-import { RCMedico, ClaseMedico } from './../../../interfaces/PolizaMedConsultas';
+import {
+  RCMedico,
+  ClaseMedico,
+} from './../../../interfaces/PolizaMedConsultas';
 
 import { FormularioCotizacionComponent } from './../formulario-cotizacion.component';
 
 declare global {
-  interface Window { dataLayer: any[]; }
+  interface Window {
+    dataLayer: any[];
+  }
 }
 
 @Component({
   selector: 'app-paso-especialidad',
   templateUrl: './paso-especialidad.component.html',
-  styleUrls: ['./paso-especialidad.component.scss']
+  styleUrls: ['./paso-especialidad.component.scss'],
 })
 export class PasoEspecialidadComponent implements OnInit {
   /**
@@ -47,7 +52,7 @@ export class PasoEspecialidadComponent implements OnInit {
     private medicoConsultaServ: ConsultasPolizaMedicoService,
     private formularioMedicos: FormularioCotizacionComponent
   ) {}
-  
+
   /**
    * @description Array de especialidades
    */
@@ -59,7 +64,7 @@ export class PasoEspecialidadComponent implements OnInit {
    * @description Declaración de formulario
    */
   especialidadForm: FormGroup;
-  
+
   /**
    * @description Array de valores asegurados que están almacenados en BD
    */
@@ -76,8 +81,6 @@ export class PasoEspecialidadComponent implements OnInit {
   mostrarValorAseguradoText: boolean = false;
   mostrarTextoPasoUno: boolean = true;
 
-  
-
   /**
    * @description Array de tipo de médicos en BD
    */
@@ -90,23 +93,23 @@ export class PasoEspecialidadComponent implements OnInit {
      */
     this.especialidadForm = this.formBuilder.group({
       especialidadMedico: ['', Validators.required],
-      autorizacion: ['', Validators.required],
+      autorizacion: ['', Validators.requiredTrue],
       tipoMedico: ['', Validators.required],
       valorAsegurado: ['', Validators.required],
     });
 
     /**
-         * @description Permite filtrar las especialidades a medida que el usuario escribe en el input
-         */
+     * @description Permite filtrar las especialidades a medida que el usuario escribe en el input
+     */
     this.medicoConsultaServ
       .getEspecialidadesMedico()
       .subscribe((especialidades) => {
         especialidades.map((esp) => {
           this.especialidades.push(esp);
         });
-        this.especialidades.sort((a,b) => {
-          return a.nombre_especialidad.localeCompare(b.nombre_especialidad)
-        })
+        this.especialidades.sort((a, b) => {
+          return a.nombre_especialidad.localeCompare(b.nombre_especialidad);
+        });
         /**
          * @description Permite filtrar las especialidades a medida que el usuario escribe en el input
          */
@@ -123,32 +126,33 @@ export class PasoEspecialidadComponent implements OnInit {
               : this.especialidades.slice()
           )
         );
-      })
+      });
 
-      //Agregado de "Tu Profesión" ====================================
-      /**
-        * @description Declaración de campos para cada formulario y sus validaciones
-        */
-      /*this.profesion = this.formBuilder.group({
+    //Agregado de "Tu Profesión" ====================================
+    /**
+     * @description Declaración de campos para cada formulario y sus validaciones
+     */
+    /*this.profesion = this.formBuilder.group({
         tipoMedico: ['', Validators.required],
         valorAsegurado: ['', Validators.required],
       });*/
-      /*this.medicoConsultaServ.getClasesPorEspecialidad().subscribe((clases) => {
+    /*this.medicoConsultaServ.getClasesPorEspecialidad().subscribe((clases) => {
         for (let i = 0; i < clases.length; i++) {
           this.tipoMedicos.push(clases[i]);
         }
       });*/
-
   }
 
   /**
    * @description Permite filtar la especialidad escrita por el usuario dentro del listado
    * @param nombreEspecialidad
    */
-  private _filtroEspecialidad(nombreEspecialidad: string): EspecialidadMedico[] { 
+  private _filtroEspecialidad(
+    nombreEspecialidad: string
+  ): EspecialidadMedico[] {
     const letraFiltro = nombreEspecialidad.toString().toLowerCase();
     return this.especialidades.filter((option) =>
-    option.nombre_especialidad.toLowerCase().includes(letraFiltro)
+      option.nombre_especialidad.toLowerCase().includes(letraFiltro)
     );
   }
 
@@ -157,13 +161,14 @@ export class PasoEspecialidadComponent implements OnInit {
    * @param key Permite capturar el código ASCII de la tecla presionada por el usuario
    * CÓDIGO ASCII DE ENTER = 13
    */
-  
+
   seleccionEspecialidadEnter(key) {
     let char = key.keyCode;
     if (char === 13) {
-      this.nombreEspecialidad = this.especialidadForm.controls[
-        'especialidadMedico'
-      ].value.nombre_especialidad;
+      this.nombreEspecialidad =
+        this.especialidadForm.controls[
+          'especialidadMedico'
+        ].value.nombre_especialidad;
     }
   }
 
@@ -171,9 +176,10 @@ export class PasoEspecialidadComponent implements OnInit {
    * Este método imprime en el input type text el texto de la opción seleccionada por el usuario
    */
   escribirEspecialidad() {
-    this.nombreEspecialidad = this.especialidadForm.controls[
-      'especialidadMedico'
-    ].value.nombre_especialidad;    
+    this.nombreEspecialidad =
+      this.especialidadForm.controls[
+        'especialidadMedico'
+      ].value.nombre_especialidad;
   }
 
   /**
@@ -181,18 +187,19 @@ export class PasoEspecialidadComponent implements OnInit {
    * @description Permite enviar la especialidad del médico siempre y cuando haya sido seleccionada
    */
   enviarEspecialidad() {
-    if (this.especialidadForm.valid) {
-      
-    } else {
-            //Evento personalizado google tag
-            window.dataLayer.push({
-              event: 'especialidad_seleccionada',
-              especialidad: this.especialidadForm.controls['especialidadMedico'].value.nombre_especialidad
-            });
-            
+    if (this.especialidadForm.controls['especialidadMedico'].valid) {
+      //Evento personalizado google tag
+      window.dataLayer.push({
+        event: 'especialidad_seleccionada',
+        especialidad:
+          this.especialidadForm.controls['especialidadMedico'].value
+            .nombre_especialidad,
+      });
+
       this.medicoConsultaServ.setEspecialidadMedico(
         this.especialidadForm.controls['especialidadMedico'].value
-          .id_especialidad_medico, this.especialidadForm.controls['especialidadMedico'].value
+          .id_especialidad_medico,
+        this.especialidadForm.controls['especialidadMedico'].value
           .nombre_especialidad
       );
       this.obtenerTiposDeProcedimientoPorEspecialidad();
@@ -226,7 +233,7 @@ export class PasoEspecialidadComponent implements OnInit {
     });
   }
   //Agregado de "Tu Profesión ======================================================"
-  
+
   //Sin descripción UnU
   limpiarRc() {
     this.valorAsegurado = [];
@@ -235,7 +242,9 @@ export class PasoEspecialidadComponent implements OnInit {
   //Sin descripción UnU
   obtenerRcPorClase() {
     this.medicoConsultaServ
-      .getRCPorClase(this.especialidadForm.controls['tipoMedico'].value.id_clase_medico)
+      .getRCPorClase(
+        this.especialidadForm.controls['tipoMedico'].value.id_clase_medico
+      )
       .subscribe((rc) => {
         this.medicoConsultaServ.setArregloValoresRc(rc);
         this.valorAsegurado = [];
@@ -248,24 +257,29 @@ export class PasoEspecialidadComponent implements OnInit {
   //Sin descripción UnU
   enviarProfesionForm() {
     if (this.especialidadForm.invalid) {
-
     } else {
       //Evento personalizado google tag
       window.dataLayer.push({
         event: 'clase_seleccionada',
-        clase: this.especialidadForm.controls['tipoMedico'].value.nombre_clase
+        clase: this.especialidadForm.controls['tipoMedico'].value.nombre_clase,
       });
       //Evento personalizado google tag
-      let index = this.valorAsegurado.findIndex(valor => valor.id_clase_rc_medico === this.especialidadForm.controls['valorAsegurado'].value)
-      console.log(index)
+      let index = this.valorAsegurado.findIndex(
+        (valor) =>
+          valor.id_clase_rc_medico ===
+          this.especialidadForm.controls['valorAsegurado'].value
+      );
+      console.log(index);
       window.dataLayer.push({
         event: 'rc_seleccionado',
-        rc: this.valorAsegurado[index].rc_medico.numero_rc_medico
+        rc: this.valorAsegurado[index].rc_medico.numero_rc_medico,
       });
 
-      this.medicoConsultaServ.setClaseNomb(this.especialidadForm.controls['tipoMedico'].value.nombre_clase)
+      this.medicoConsultaServ.setClaseNomb(
+        this.especialidadForm.controls['tipoMedico'].value.nombre_clase
+      );
       this.medicoConsultaServ.setClaseRc(
-      this.especialidadForm.controls['valorAsegurado'].value
+        this.especialidadForm.controls['valorAsegurado'].value
       );
       this.mostrarTextoPasoUno = false;
     }
@@ -284,7 +298,7 @@ export class PasoEspecialidadComponent implements OnInit {
     this.mostrarTextoGeneral = false;
     this.mostrarTipoProcedimientoText = false;
   }
-  
+
   /**
    * @method
    * @description Permite imprimir los mensajes de error, cuando los campos del formulario no cumplen con las validaciones
@@ -293,12 +307,12 @@ export class PasoEspecialidadComponent implements OnInit {
   errorSeleccion() {
     return 'Debes seleccionar una opción para continuar';
   }
-  
+
   /**
    * @method
    * @description Realiza la consulta al api de los tipos de procedimiento por especialidad
    */
-  obtenerTiposDeProcedimientoPorEspecialidad(){
+  obtenerTiposDeProcedimientoPorEspecialidad() {
     this.medicoConsultaServ.getClasesPorEspecialidad().subscribe((clases) => {
       for (let i = 0; i < clases.length; i++) {
         this.tipoMedicos.push(clases[i]);
@@ -312,10 +326,9 @@ export class PasoEspecialidadComponent implements OnInit {
    * (realiza las verificaciones pertinentes para el guardado)
    */
 
-  confirmarFormularioEspecialidad(){
-    if(this.especialidadForm.invalid){
-      
-    }else{
+  confirmarFormularioEspecialidad() {
+    if (this.especialidadForm.invalid) {
+    } else {
       this.enviarEspecialidad();
       this.enviarProfesionForm();
       this.cambiarFormularioDeEspecialidadPorContacto();
@@ -326,7 +339,7 @@ export class PasoEspecialidadComponent implements OnInit {
    * @method
    * @description Gestiona el estado del cambio de formularios
    */
-  cambiarFormularioDeEspecialidadPorContacto(){
+  cambiarFormularioDeEspecialidadPorContacto() {
     this.formularioMedicos.setMostrarFormularioEspecialidad(false);
   }
 }

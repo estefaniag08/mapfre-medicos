@@ -28,7 +28,7 @@
                 {{tipoMedico.clase_medico.nombre_clase}}
             </mat-option>
         </mat-select>
-        <mat-hint align="end"> <a type="button" (click)="mostrarTextoTipoProcedimiento()">¿Qué tipo de procedimiento escojo?</a></mat-hint>
+        <!--<mat-hint align="end"> <a type="button" (click)="mostrarTextoTipoProcedimiento()">¿Qué tipo de procedimiento escojo?</a></mat-hint>-->
         <mat-error>
             {{errorSeleccion()}}
         </mat-error>
@@ -40,7 +40,7 @@
                 {{valor.rc_medico.numero_rc_medico | currency : '$' : 'symbol' : '1.0-0' }}
             </mat-option>
         </mat-select>
-        <mat-hint align="end"> <a type="button" (click)="mostrarTextoValorAsegurado()">¿Qué es esto?</a></mat-hint>
+        <!--<mat-hint align="end"> <a type="button" (click)="mostrarTextoValorAsegurado()">¿Qué es esto?</a></mat-hint>-->
         <mat-error>
             {{errorSeleccion()}}
         </mat-error>
@@ -51,7 +51,7 @@
                 class="enlace-primario">términos y condiciones del sitio</a></mat-checkbox>
     </div>
     <div class="form-button-container">
-        <button mat-raised-button class="form-button" matStepperNext [disabled]="especialidadForm.invalid"
+        <button mat-raised-button class="form-button" [disabled]="especialidadForm.invalid"
             (click)="confirmarFormularioEspecialidad()">SIGUIENTE</button>
     </div> 
 </form>
