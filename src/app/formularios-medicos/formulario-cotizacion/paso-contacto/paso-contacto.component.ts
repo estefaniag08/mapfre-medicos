@@ -65,15 +65,14 @@ export class PasoContactoComponent implements OnInit {
 
   //Sin descripción
   enviarSobreTiForm() {
-    if (this.sobreTi.invalid) {
+    if (this.contacto.invalid) {
     } else {
       const infoPersona: InfoPersonalPersona = {
         id_persona: '000000',
         id_tipo_identificacion: 1,
-        nombre: this.sobreTi.controls['nombresMedico'].value,
-        apellidos: this.sobreTi.controls['apellidosMedico'].value,
-        fecha_nacimiento: this.sobreTi.controls['fechaNacimiento'].value,
-        id_genero: this.sobreTi.controls['genero'].value,
+        nombre: this.contacto.controls['nombresMedico'].value,
+        apellidos: this.contacto.controls['apellidosMedico'].value,
+        fecha_nacimiento: new Date('02/02/2022'),
       };
       this.personaSolicServ.anadirPersona(infoPersona);
     }

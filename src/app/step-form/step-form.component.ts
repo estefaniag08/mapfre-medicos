@@ -176,15 +176,15 @@ export class StepFormComponent implements OnInit {
   enviarSobreTiForm() {
     if (this.sobreTi.invalid) {
     } else {
-      const infoPersona: InfoPersonalPersona = {
-        id_persona: '000000',
-        id_tipo_identificacion: 1,
-        nombre: this.sobreTi.controls['nombresMedico'].value,
-        apellidos: this.sobreTi.controls['apellidosMedico'].value,
-        fecha_nacimiento: this.sobreTi.controls['fechaNacimiento'].value,
-        id_genero: this.sobreTi.controls['genero'].value,
-      };
-      this.personaSolicServ.anadirPersona(infoPersona);
+      //const infoPersona: InfoPersonalPersona = {
+      //id_persona: '000000',
+      //  id_tipo_identificacion: 1,
+      //  nombre: this.sobreTi.controls['nombresMedico'].value,
+      //  apellidos: this.sobreTi.controls['apellidosMedico'].value,
+      //  fecha_nacimiento: this.sobreTi.controls['fechaNacimiento'].value,
+      //  id_genero: this.sobreTi.controls['genero'].value,
+      //};
+      //this.personaSolicServ.anadirPersona(infoPersona);
     }
   }
 

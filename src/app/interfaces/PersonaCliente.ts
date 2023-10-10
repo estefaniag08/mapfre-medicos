@@ -10,7 +10,7 @@ export interface InfoPersonalPersona {
     nombre: string;
     apellidos: string;
     fecha_nacimiento: Date;
-    id_genero: number;
+    //id_genero: number;
 }
 
 export interface ClienteInfo{
