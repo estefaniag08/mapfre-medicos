@@ -8,9 +8,8 @@ describe('PasoEspecialidadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PasoEspecialidadComponent ]
-    })
-    .compileComponents();
+      declarations: [PasoEspecialidadComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -8,9 +8,8 @@ describe('FormularioCotizacionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormularioCotizacionComponent ]
-    })
-    .compileComponents();
+      declarations: [FormularioCotizacionComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

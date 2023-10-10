@@ -30,7 +30,7 @@ import { FormularioCotizacionComponent } from './formulario-cotizacion.component
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
   ],
   exports: [FormularioCotizacionComponent],
 })
