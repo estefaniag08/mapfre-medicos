@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { PersonaSolicitudesService } from './../../../services/persona-solicitudes.service';
-
+import { ConsultasPolizaMedicoService } from './../../../services/consultas-poliza-medico.service';
 import {
   InfoPersonalPersona,
+  ClienteInfo,
 } from './../../../interfaces/PersonaCliente';
 @Component({
   selector: 'app-paso-contacto',
   templateUrl: './paso-contacto.component.html',
-  styleUrls: ['./paso-contacto.component.scss']
+  styleUrls: ['./paso-contacto.component.scss'],
 })
 export class PasoContactoComponent implements OnInit {
   sobreTi: FormGroup;
@@ -33,9 +30,10 @@ export class PasoContactoComponent implements OnInit {
    * @description Variable que identifica de cara al ciudadano si el valor que intenta ingresar en alfabético
    */
   esLetra: boolean;
-  mobilePhonePattern = "^(?=.*[0-9]).{7,10}$";
+  mobilePhonePattern = '^(?=.*[0-9]).{7,10}$';
   // emailPattern ="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+[.a-zA-Z]$"
-  emailPattern: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  emailPattern: RegExp =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   /**
    *
@@ -43,7 +41,8 @@ export class PasoContactoComponent implements OnInit {
    */
   constructor(
     private formBuilder: FormBuilder,
-    private personaSolicServ: PersonaSolicitudesService
+    private personaSolicServ: PersonaSolicitudesService,
+    private medicoConsultaServ: ConsultasPolizaMedicoService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 70, 0, 0);
@@ -54,11 +53,19 @@ export class PasoContactoComponent implements OnInit {
     this.contacto = this.formBuilder.group({
       nombresMedico: ['', Validators.required],
       apellidosMedico: ['', Validators.required],
-      numeroCelular: ['', Validators.compose([  Validators.required, Validators.pattern(this.mobilePhonePattern)]),],
-      correo: ['', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
-      confirmacionCorreo: [
+      numeroCelular: [
         '',
-        Validators.compose([Validators.required, Validators.pattern(this.emailPattern)]),
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(this.mobilePhonePattern),
+        ]),
+      ],
+      correo: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(this.emailPattern),
+        ]),
       ],
     });
   }
@@ -74,10 +81,28 @@ export class PasoContactoComponent implements OnInit {
         apellidos: this.contacto.controls['apellidosMedico'].value,
         fecha_nacimiento: new Date('02/02/2022'),
       };
-      this.personaSolicServ.anadirPersona(infoPersona);
+      const infoCliente: ClienteInfo = {
+        correo: this.contacto.controls['correo'].value,
+        celular: this.contacto.controls['numeroCelular'].value,
+      };
+      this.personaSolicServ
+        .anadirPersona(infoPersona)
+        .subscribe((respuesta) => {
+          this.personaSolicServ.setIdRegistroPersona(respuesta.id_persona);
+          this.personaSolicServ
+            .anadirInformacionContacto(infoCliente)
+            .subscribe((respuesta) => {
+              this.personaSolicServ.setIdCotizacionMedico(
+                respuesta.id_poliza_medico
+              );
+              this.personaSolicServ.anadirInformacionCotizacion(
+                this.medicoConsultaServ.getInformacionCotizacion()
+              );
+            });
+        });
     }
   }
-  
+
   //Sin descripción
   errorCelular() {
     return 'Ingresa tu número de celular para continuar';
@@ -88,18 +113,8 @@ export class PasoContactoComponent implements OnInit {
     if (this.contacto.controls['correo'].hasError('required')) {
       return 'Ingresa un correo para continuar';
     }
-    if(this.contacto.controls['correo'].hasError('pattern')) {
-      return "Ingresa un correo válido para continuar"
-    }
-  }
-
-  //Sin descripción
-  errorConfirmacionCorreo() {
-    if (this.contacto.controls['confirmacionCorreo'].hasError('required')) {
-      return 'Ingresa un correo para continuar';
-    }
-    if(this.contacto.controls['confirmacionCorreo'].hasError('pattern')) {
-      return "Ingresa un correo válido para continuar"
+    if (this.contacto.controls['correo'].hasError('pattern')) {
+      return 'Ingresa un correo válido para continuar';
     }
   }
 
@@ -144,22 +159,5 @@ export class PasoContactoComponent implements OnInit {
       this.esLetra = false;
     }
     this.esLetra = true;
-  }
-
-  /**
-   * @method
-   * @description Permite validar que el correo ingresado en el campo de correo y confirmación de correo sean el mismo
-   */
-  validarConfirmacionCorreo() {
-    if (
-      this.contacto.controls['correo'].touched &&
-      this.contacto.controls['confirmacionCorreo'].touched
-    ) {
-      if (
-        this.contacto.value.correo !=
-        this.contacto.value.confirmacionCorreo
-      )
-        return 'Los valores deben coincidir';
-    }
   }
 }

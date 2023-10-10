@@ -1,45 +1,64 @@
 <h1>Cuéntanos sobre ti</h1>
 <form [formGroup]="contacto" class="form-container">
-    <mat-form-field appearance="outline">
-        <mat-label>Nombres</mat-label>
-        <input matInput placeholder="Nombres" formControlName="nombresMedico" required>
-        <mat-error>
-            {{errorNombre()}}
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Apellidos</mat-label>
-        <input matInput placeholder="Apellidos" formControlName="apellidosMedico" required>
-        <mat-error>
-            {{errorApellido()}}
-        </mat-error>
-    </mat-form-field> 
-    <!-- traido de step-form -->
-    <mat-form-field appearance="outline">
-        <mat-label>Número celular</mat-label>
-        <input (keydown)="bloquearLetras($event)" matInput placeholder="Número de celular" formControlName="numeroCelular" required>
-        <mat-error>
-            {{errorCelular()}}
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Correo Electrónico</mat-label>
-        <input matInput placeholder="Correo Electrónico" formControlName="correo" type="email" required >
-        <mat-error>
-            {{errorCorreo()}}
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Confirma tu correo</mat-label>
-        <input paste-directive matInput placeholder="Confirma tu correo"  type="email"
-            formControlName="confirmacionCorreo" (blur)="validarConfirmacionCorreo()" required>
-        
-            <mat-error> {{errorConfirmacionCorreo()}}  </mat-error>
-            <mat-error> {{validarConfirmacionCorreo ()}} </mat-error>
-        
-    </mat-form-field>
-    <div class="form-button-container">
-        <button mat-raised-button class="form-button"  [disabled]="contacto.invalid"
-            (click)="enviarSobreTiForm()">SIGUIENTE</button>
-    </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Nombres</mat-label>
+    <input
+      matInput
+      placeholder="Nombres"
+      formControlName="nombresMedico"
+      required
+    />
+    <mat-error>
+      {{ errorNombre() }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Apellidos</mat-label>
+    <input
+      matInput
+      placeholder="Apellidos"
+      formControlName="apellidosMedico"
+      required
+    />
+    <mat-error>
+      {{ errorApellido() }}
+    </mat-error>
+  </mat-form-field>
+  <!-- traido de step-form -->
+  <mat-form-field appearance="outline">
+    <mat-label>Número celular</mat-label>
+    <input
+      (keydown)="bloquearLetras($event)"
+      matInput
+      placeholder="Número de celular"
+      formControlName="numeroCelular"
+      required
+    />
+    <mat-error>
+      {{ errorCelular() }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Correo Electrónico</mat-label>
+    <input
+      matInput
+      placeholder="Correo Electrónico"
+      formControlName="correo"
+      type="email"
+      required
+    />
+    <mat-error>
+      {{ errorCorreo() }}
+    </mat-error>
+  </mat-form-field>
+  <div class="form-button-container">
+    <button
+      mat-raised-button
+      class="form-button"
+      [disabled]="contacto.invalid"
+      (click)="enviarSobreTiForm()"
+    >
+      SIGUIENTE
+    </button>
+  </div>
 </form>
