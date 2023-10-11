@@ -16,6 +16,8 @@
     <mat-autocomplete
       #especialidadAutocomplete="matAutocomplete"
       (optionSelected)="escribirEspecialidad()"
+      (optionSelected)="limpiarTipoProcedimiento()"
+      (optionSelected)="limpiarValorAsegurado()"
       autoActiveFirstOption
     >
       <mat-option
@@ -35,7 +37,11 @@
 
   <mat-form-field appearance="outline" required>
     <mat-label>Tipo de procedimiento</mat-label>
-    <mat-select formControlName="tipoMedico" (change)="limpiarRc()">
+    <mat-select
+      formControlName="tipoMedico"
+      (optionSelected)="limpiarValorAsegurado()"
+
+    >
       <mat-option
         *ngFor="let tipoMedico of tipoMedicos"
         (click)="obtenerRcPorClase()"
@@ -51,7 +57,10 @@
   </mat-form-field>
   <mat-form-field appearance="outline" required>
     <mat-label>Valor asegurado</mat-label>
-    <mat-select formControlName="valorAsegurado">
+    <mat-select
+      formControlName="valorAsegurado"
+
+    >
       <mat-option
         *ngFor="let valor of valorAsegurado"
         [value]="valor.id_clase_rc_medico"

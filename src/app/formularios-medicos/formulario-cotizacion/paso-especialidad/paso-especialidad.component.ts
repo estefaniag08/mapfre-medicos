@@ -98,6 +98,30 @@ export class PasoEspecialidadComponent implements OnInit {
       valorAsegurado: ['', Validators.required],
     });
 
+    this.especialidadForm.get('tipoMedico').disable();
+    this.especialidadForm.get('valorAsegurado').disable();
+    // Observa los cambios en el campo 'especialidad'
+    this.especialidadForm.get('especialidadMedico').statusChanges.subscribe(status => {
+      if (this.especialidadForm.get('especialidadMedico').invalid || !this.especialidadForm.get('especialidadMedico').value) {
+        this.especialidadForm.get('tipoMedico').disable();
+        this.especialidadForm.get('tipoMedico').setValue('');
+        this.especialidadForm.get('valorAsegurado').disable();
+        this.especialidadForm.get('valorAsegurado').setValue('');
+      } else {
+        this.especialidadForm.get('tipoMedico').enable();
+      }
+    });
+
+    // Observa los cambios en el campo 'procedimiento'
+    this.especialidadForm.get('tipoMedico').statusChanges.subscribe(status => {
+      if (this.especialidadForm.get('tipoMedico').invalid || !this.especialidadForm.get('tipoMedico').value) {
+        this.especialidadForm.get('valorAsegurado').disable();
+        this.especialidadForm.get('valorAsegurado').setValue('');
+      } else {
+        this.especialidadForm.get('valorAsegurado').enable();
+      }
+    });
+
     /**
      * @description Permite filtrar las especialidades a medida que el usuario escribe en el input
      */
@@ -212,6 +236,8 @@ export class PasoEspecialidadComponent implements OnInit {
    * @returns Mensajes de error que se imprimirán en HTML bajo el campo de comentario
    */
   errorEspecialidad() {
+    //this.limpiarTipoProcedimiento();
+    //this.limpiarValorAsegurado();
     return 'Debes seleccionar una especialidad';
   }
   /**
@@ -235,11 +261,6 @@ export class PasoEspecialidadComponent implements OnInit {
   //Agregado de "Tu Profesión ======================================================"
 
   //Sin descripción UnU
-  limpiarRc() {
-    this.valorAsegurado = [];
-  }
-
-  //Sin descripción UnU
   obtenerRcPorClase() {
     this.medicoConsultaServ
       .getRCPorClase(
@@ -256,8 +277,10 @@ export class PasoEspecialidadComponent implements OnInit {
 
   //Sin descripción UnU
   enviarProfesionForm() {
-    if (this.especialidadForm.invalid) {
-    } else {
+    if (
+      this.especialidadForm.controls['tipoMedico'].valid &&
+      this.especialidadForm.controls['valorAsegurado'].valid
+    ) {
       //Evento personalizado google tag
       window.dataLayer.push({
         event: 'clase_seleccionada',
@@ -341,6 +364,24 @@ export class PasoEspecialidadComponent implements OnInit {
    */
   cambiarFormularioDeEspecialidadPorContacto() {
     this.formularioMedicos.setMostrarFormularioEspecialidad(false);
+  }
+
+  /**
+   * @method
+   * @description Inicializa el campo de tipoMedico(tipo de procedimiento)
+   */
+  limpiarTipoProcedimiento(){
+    this.tipoMedicos = [];
+    this.especialidadForm.controls['tipoMedico'].clearValidators();
+  }
+
+  /**
+   * @methods
+   * @description Inicializa el campo de valorAsegurado
+   */
+  limpiarValorAsegurado(){
+    this.valorAsegurado = [];
+    this.especialidadForm.controls['valorAsegurado'].clearAsyncValidators();
   }
 }
 // COMPONENTE DE TÉRMINOS Y CONDICIONES DEL SITIO
