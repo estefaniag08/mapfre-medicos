@@ -11,13 +11,13 @@ export class FormularioCotizacionComponent implements OnInit {
    * (si es falso, muestra el formulario de contacto)
    */
 
-  public mostrarFormularioEspecialidad: boolean = true;
+  public formularioEspecialidadFinalizado: boolean = false;
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  public setMostrarFormularioEspecialidad(valor: boolean) {
-    this.mostrarFormularioEspecialidad = valor;
+  setFormularioEspecialidadFinalizado(valor: boolean) {
+    this.formularioEspecialidadFinalizado = valor;
   }
 }

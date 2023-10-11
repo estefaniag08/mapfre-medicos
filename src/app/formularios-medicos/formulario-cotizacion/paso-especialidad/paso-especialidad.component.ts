@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, HostListener } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   FormBuilder,
@@ -23,8 +23,6 @@ import {
   ClaseMedico,
 } from './../../../interfaces/PolizaMedConsultas';
 
-import { FormularioCotizacionComponent } from './../formulario-cotizacion.component';
-
 declare global {
   interface Window {
     dataLayer: any[];
@@ -39,6 +37,18 @@ declare global {
 export class PasoEspecialidadComponent implements OnInit {
   /**
    *
+   * @description formularioFinalizado
+   *
+   */
+
+  @Output() formularioFinalizado = new EventEmitter<boolean>();
+
+  emitirFormularioFinalizado(finalizado : boolean){
+    this.formularioFinalizado.emit(finalizado);
+  }
+
+  /**
+   *
    * @param formBuilder
    * @param router
    * @param dialog
@@ -49,8 +59,7 @@ export class PasoEspecialidadComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private medicoConsultaServ: ConsultasPolizaMedicoService,
-    private formularioMedicos: FormularioCotizacionComponent
+    private medicoConsultaServ: ConsultasPolizaMedicoService
   ) {}
 
   /**
@@ -101,26 +110,37 @@ export class PasoEspecialidadComponent implements OnInit {
     this.especialidadForm.get('tipoMedico').disable();
     this.especialidadForm.get('valorAsegurado').disable();
     // Observa los cambios en el campo 'especialidad'
-    this.especialidadForm.get('especialidadMedico').statusChanges.subscribe(status => {
-      if (this.especialidadForm.get('especialidadMedico').invalid || !this.especialidadForm.get('especialidadMedico').value) {
-        this.especialidadForm.get('tipoMedico').disable();
-        this.especialidadForm.get('tipoMedico').setValue('');
-        this.especialidadForm.get('valorAsegurado').disable();
-        this.especialidadForm.get('valorAsegurado').setValue('');
-      } else {
-        this.especialidadForm.get('tipoMedico').enable();
-      }
-    });
+    this.especialidadForm
+      .get('especialidadMedico')
+      .statusChanges.subscribe((status) => {
+        if (
+          this.especialidadForm.get('especialidadMedico').invalid ||
+          !this.especialidadForm.get('especialidadMedico').value
+        ) {
+          this.especialidadForm.get('tipoMedico').disable();
+          this.especialidadForm.get('tipoMedico').setValue('');
+          this.tipoMedicos = [];
+          this.especialidadForm.get('valorAsegurado').disable();
+          this.especialidadForm.get('valorAsegurado').setValue('');
+        } else {
+          this.especialidadForm.get('tipoMedico').enable();
+        }
+      });
 
     // Observa los cambios en el campo 'procedimiento'
-    this.especialidadForm.get('tipoMedico').statusChanges.subscribe(status => {
-      if (this.especialidadForm.get('tipoMedico').invalid || !this.especialidadForm.get('tipoMedico').value) {
-        this.especialidadForm.get('valorAsegurado').disable();
-        this.especialidadForm.get('valorAsegurado').setValue('');
-      } else {
-        this.especialidadForm.get('valorAsegurado').enable();
-      }
-    });
+    this.especialidadForm
+      .get('tipoMedico')
+      .statusChanges.subscribe((status) => {
+        if (
+          this.especialidadForm.get('tipoMedico').invalid ||
+          !this.especialidadForm.get('tipoMedico').value
+        ) {
+          this.especialidadForm.get('valorAsegurado').disable();
+          this.especialidadForm.get('valorAsegurado').setValue('');
+        } else {
+          this.especialidadForm.get('valorAsegurado').enable();
+        }
+      });
 
     /**
      * @description Permite filtrar las especialidades a medida que el usuario escribe en el input
@@ -350,39 +370,13 @@ export class PasoEspecialidadComponent implements OnInit {
    */
 
   confirmarFormularioEspecialidad() {
-    if (this.especialidadForm.invalid) {
-    } else {
+    if (this.especialidadForm.valid) {
       this.enviarEspecialidad();
       this.enviarProfesionForm();
-      this.cambiarFormularioDeEspecialidadPorContacto();
+      this.emitirFormularioFinalizado(true);
     }
   }
 
-  /**
-   * @method
-   * @description Gestiona el estado del cambio de formularios
-   */
-  cambiarFormularioDeEspecialidadPorContacto() {
-    this.formularioMedicos.setMostrarFormularioEspecialidad(false);
-  }
-
-  /**
-   * @method
-   * @description Inicializa el campo de tipoMedico(tipo de procedimiento)
-   */
-  limpiarTipoProcedimiento(){
-    this.tipoMedicos = [];
-    this.especialidadForm.controls['tipoMedico'].clearValidators();
-  }
-
-  /**
-   * @methods
-   * @description Inicializa el campo de valorAsegurado
-   */
-  limpiarValorAsegurado(){
-    this.valorAsegurado = [];
-    this.especialidadForm.controls['valorAsegurado'].clearAsyncValidators();
-  }
 }
 // COMPONENTE DE TÉRMINOS Y CONDICIONES DEL SITIO
 

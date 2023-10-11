@@ -1,4 +1,5 @@
 <app-paso-especialidad
-  *ngIf="mostrarFormularioEspecialidad"
+  (formularioFinalizado)="setFormularioEspecialidadFinalizado($event)"
+  *ngIf="!formularioEspecialidadFinalizado"
 ></app-paso-especialidad>
-<app-paso-contacto *ngIf="!mostrarFormularioEspecialidad"></app-paso-contacto>
+<app-paso-contacto *ngIf="formularioEspecialidadFinalizado"></app-paso-contacto>

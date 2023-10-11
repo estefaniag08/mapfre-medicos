@@ -16,8 +16,6 @@
     <mat-autocomplete
       #especialidadAutocomplete="matAutocomplete"
       (optionSelected)="escribirEspecialidad()"
-      (optionSelected)="limpiarTipoProcedimiento()"
-      (optionSelected)="limpiarValorAsegurado()"
       autoActiveFirstOption
     >
       <mat-option
@@ -39,8 +37,6 @@
     <mat-label>Tipo de procedimiento</mat-label>
     <mat-select
       formControlName="tipoMedico"
-      (optionSelected)="limpiarValorAsegurado()"
-
     >
       <mat-option
         *ngFor="let tipoMedico of tipoMedicos"
