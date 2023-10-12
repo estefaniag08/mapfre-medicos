@@ -4,6 +4,15 @@ export interface PersonaCedula {
     fecha_expedicion_documento: string;
 }
 
+export interface PersonaInfoDetallada {
+    id_persona: number;
+    id_tipo_identificacion: number;   
+    fecha_expedicion_documento: string;
+    id_genero: number;
+    fecha_nacimiento: Date;
+}
+
+
 export interface InfoPersonalPersona {
     id_persona: string;
     id_tipo_identificacion: number;

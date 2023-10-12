@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 import {
   InfoPersonalPersona,
   ClienteInfo,
-  PersonaCedula,
+  PersonaInfoDetallada,
   RespuestaPersona,
   InformacionCompletaFinal,
   InformacionUrl,
@@ -70,7 +70,7 @@ export class PersonaSolicitudesService {
         this.http.post(url2, {}).subscribe((rta) => {});
       });
   }
-  anadirInfoDocumentoPersona(infoDocumento: PersonaCedula) {
+  anadirInfoDetallada(infoDocumento: PersonaInfoDetallada) {
     const url =
       this.path + `/clientes/informacion-personal/${this.idRegistroPersona}`;
     this.http.put(url, infoDocumento).subscribe((respuesta) => {});

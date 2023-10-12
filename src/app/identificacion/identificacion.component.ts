@@ -79,6 +79,8 @@ export class IdentificacionComponent implements OnInit {
     this.identificacionForm = this.formBuilder.group({
       tipoIdentificacion: ['', Validators.required,],
       numeroIdentificacion: ['', Validators.required],
+      fechaNacimiento: ['', Validators.required],
+      genero: ['', Validators.required],
       fechaExpedicionDocumento: ['', Validators.required],
       lugarTrabajo: ['', Validators.required],
       ciudad: ['', Validators.required,],
@@ -174,6 +176,10 @@ export class IdentificacionComponent implements OnInit {
     }
   }
 
+  errorFecha() {
+    return 'Selecciona una fecha para continuar';
+  }
+
   errorLugarTrabajo() {
     return 'Ingresa tu lugar de trabajo para continuar';
   }
@@ -192,10 +198,12 @@ export class IdentificacionComponent implements OnInit {
         this.identificacionForm.controls['lugarTrabajo'].value,
         this.identificacionForm.controls['ciudad'].value.codigo_ciudad,
         this.identificacionForm.controls['direccion'].value);
-      this.personaService.anadirInfoDocumentoPersona({
+      this.personaService.anadirInfoDetallada({
         id_persona: this.identificacionForm.controls['numeroIdentificacion'].value,
         id_tipo_identificacion: this.identificacionForm.controls['tipoIdentificacion'].value,
-        fecha_expedicion_documento: this.identificacionForm.controls['fechaExpedicionDocumento'].value
+        fecha_expedicion_documento: this.identificacionForm.controls['fechaExpedicionDocumento'].value,
+        id_genero: this.identificacionForm.controls['genero'].value,
+        fecha_nacimiento: this.identificacionForm.controls['fechaNacimiento'].value
       });
       this.personaService.anadirInformacionAdicional(this.polizaConsultasService.getInformacionCotizacion()).subscribe(rta => {
       })
