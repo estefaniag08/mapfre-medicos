@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   FormBuilder,
@@ -36,15 +36,16 @@ declare global {
 })
 export class PasoEspecialidadComponent implements OnInit {
   /**
-   *
-   * @description formularioFinalizado
-   *
+   * @param formularioFinalizado
    */
 
-  @Output() formularioFinalizado = new EventEmitter<boolean>();
+  @Output() formularioEspecialidadFinalizado = new EventEmitter<boolean>();
 
-  emitirFormularioFinalizado(finalizado : boolean){
-    this.formularioFinalizado.emit(finalizado);
+  /**
+   * @description Metodo encargado de emitir al padre el momento en que el formulario finaliza
+   */
+  emitirFormularioFinalizado(finalizado: boolean) {
+    this.formularioEspecialidadFinalizado.emit(finalizado);
   }
 
   /**
@@ -376,7 +377,6 @@ export class PasoEspecialidadComponent implements OnInit {
       this.emitirFormularioFinalizado(true);
     }
   }
-
 }
 // COMPONENTE DE TÉRMINOS Y CONDICIONES DEL SITIO
 

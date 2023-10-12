@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { PersonaSolicitudesService } from './../../../services/persona-solicitudes.service';
@@ -14,6 +14,17 @@ import {
 })
 export class PasoContactoComponent implements OnInit {
   sobreTi: FormGroup;
+
+  @Output() formularioContactoFinalizado = new EventEmitter<boolean>();
+
+  /**
+   * @description Metodo encargado de emitir al padre el momento en que el formulario finaliza
+   */
+  emitirFormularioFinalizado(finalizado: boolean) {
+    console.log("hola");
+    this.formularioContactoFinalizado.emit(finalizado);
+  }
+
   contacto: FormGroup;
   /**
    * @description Variable que permite definir la fecha mínima para iniciar la selección en el calendario
@@ -72,8 +83,7 @@ export class PasoContactoComponent implements OnInit {
 
   //Sin descripción
   enviarSobreTiForm() {
-    if (this.contacto.invalid) {
-    } else {
+    if (this.contacto.valid) {
       const infoPersona: InfoPersonalPersona = {
         id_persona: '000000',
         id_tipo_identificacion: 1,
@@ -100,12 +110,18 @@ export class PasoContactoComponent implements OnInit {
               );
             });
         });
+      this.emitirFormularioFinalizado(true);
     }
   }
 
   //Sin descripción
   errorCelular() {
-    return 'Ingresa tu número de celular para continuar';
+    if (this.contacto.controls['numeroCelular'].hasError('required')) {
+      return 'Ingresa un número de celular para continuar';
+    }
+    if (this.contacto.controls['numeroCelular'].hasError('pattern')) {
+      return 'Ingresa un número de celular valido para continuar';
+    }
   }
 
   //Sin descripción

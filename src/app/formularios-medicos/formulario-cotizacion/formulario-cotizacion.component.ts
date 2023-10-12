@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario-cotizacion',
@@ -11,13 +12,30 @@ export class FormularioCotizacionComponent implements OnInit {
    * (si es falso, muestra el formulario de contacto)
    */
 
-  public formularioEspecialidadFinalizado: boolean = false;
+  public pasoDelFormulario: number = 0;
 
-  constructor() {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {}
 
-  setFormularioEspecialidadFinalizado(valor: boolean) {
-    this.formularioEspecialidadFinalizado = valor;
+  formularioEspecialidadFinalizado(finalizado: boolean) {
+    if (finalizado) {
+      this.pasoDelFormulario = 1;
+    } else {
+      this.pasoDelFormulario = 0;
+    }
+  }
+  formularioContactoFinalizado(finalizado: boolean) {
+    if (finalizado) {
+      this.pasoDelFormulario = 2;
+      this.enrutarAPaginaCotización();
+    } else {
+      this.pasoDelFormulario = 0;
+    }
+  }
+  enrutarAPaginaCotización() {
+    this.router.navigate(['mostrar-cotizacion'], {
+      relativeTo: this.route.parent,
+    });
   }
 }
