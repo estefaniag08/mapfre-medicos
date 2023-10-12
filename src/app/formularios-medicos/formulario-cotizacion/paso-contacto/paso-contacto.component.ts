@@ -120,7 +120,7 @@ export class PasoContactoComponent implements OnInit {
       return 'Ingresa un número de celular para continuar';
     }
     if (this.contacto.controls['numeroCelular'].hasError('pattern')) {
-      return 'Ingresa un número de celular valido para continuar';
+      return 'Ingresa un número de celular válido para continuar';
     }
   }
 
