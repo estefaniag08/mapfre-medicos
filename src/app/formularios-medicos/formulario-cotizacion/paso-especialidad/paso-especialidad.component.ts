@@ -127,7 +127,6 @@ export class PasoEspecialidadComponent implements OnInit {
           this.especialidadForm.get('tipoMedico').enable();
         }
       });
-
     // Observa los cambios en el campo 'procedimiento'
     this.especialidadForm
       .get('tipoMedico')

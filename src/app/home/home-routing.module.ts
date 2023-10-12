@@ -10,8 +10,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   // { path: 'home', redirectTo: '' },
   {
-    path: 'cotizacion',
-    loadChildren: () => import('./../step-form/step-form.module').then((m) => m.StepFormModule),
+    path: 'mostrar-cotizacion',
+    loadChildren: () => import('./../mostrar-cotizacion/mostrar-cotizacion.module').then((m) => m.MostrarCotizacionModule),
   },
 ];
 

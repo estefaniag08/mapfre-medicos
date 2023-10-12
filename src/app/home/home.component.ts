@@ -268,6 +268,26 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['cotizacion'], { relativeTo: this.route.parent });
     }
   }
+
+  /**
+   * @method
+   * @description Redirige a la página de cotización
+   */
+  enrutarAPaginaCotizacion(){
+    this.router.navigate(['mostrar-cotizacion'], {
+      relativeTo: this.route.parent,
+    });
+  }
+
+  /**
+   * @method
+   * @description Verifica que el formulario se haya finalizado
+   */
+  formularioCotizacionFinalizado(finalizado:boolean){
+    if(finalizado){
+      this.enrutarAPaginaCotizacion();
+    }
+  }
   /**
    * @method
    * @description Permite abrir el diálogo que contiene el tratamiento de datos personales del cotizador
