@@ -3,14 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { MostrarCotizacionComponent } from './mostrar-cotizacion.component';
 
 const routes: Routes = [
-  // { path: '', component: MostrarCotizacionComponent, pathMatch: 'full' },
-  // {
-  //   path: 'identificacion-medico',
-  //   loadChildren: () =>
-  //     import('./../identificacion/identificacion.module').then(
-  //       (m) => m.IdentificacionModule
-  //     ),
-  // },
+  { path: '', component: MostrarCotizacionComponent, pathMatch: 'full' },
+  {
+    path: 'identificacion-medico',
+    loadChildren: () =>
+      import('./../identificacion/identificacion.module').then(
+        (m) => m.IdentificacionModule
+      ),
+  },
 ];
 
 @NgModule({

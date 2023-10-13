@@ -1,257 +1,426 @@
 <app-navigation></app-navigation>
 <div class="step-grid">
-    <div class="lineas-container step">
-        <div class="linea step amarillo"></div>
-        <div class="franja step amarillo"></div>
-    </div>
-    <div class="step-form">
-        <div *ngIf="FormIdentifiacion">
-            <h1>Identificación</h1>
-            <form [formGroup]="identificacionForm" class="form-container">
-                <mat-form-field appearance="outline" required>
-                    <mat-label>Tipo Documento</mat-label>
-                    <mat-select formControlName="tipoIdentificacion" selectFirstOption="true">
-                        <mat-option *ngFor="let tipo of tipoDocumento" [value]="tipo.id_tipo_identificacion">
-                            {{ tipo.nombre_identificacion }}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error> {{errorDocumento()}} </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Número de documento</mat-label>
-                    <input matInput placeholder="Número de documento" formControlName="numeroIdentificacion" required>
-                    <mat-error> {{errorNumeroDocumento()}} </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Fecha de expedición documento</mat-label>
-                    <input matInput [matDatepicker]="calendarIcon" formControlName="fechaExpedicionDocumento"
-                        placeholder="DD/MM/AAAA" required>
-                    <mat-datepicker-toggle matSuffix [for]="calendarIcon"></mat-datepicker-toggle>
-                    <mat-datepicker #calendarIcon [startAt]="maxDate"></mat-datepicker>
-                    <mat-error>
-                        {{errorFechaExpedicion()}}
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Fecha de nacimiento</mat-label>
-                    <input matInput [matDatepicker]="calendarIcon" [min]="minDate" [max]="maxDate"
-                        formControlName="fechaNacimiento" placeholder="DD/MM/AAAA" required>
-                    <mat-datepicker-toggle matSuffix [for]="calendarIcon"></mat-datepicker-toggle>
-                    <mat-datepicker #calendarIcon [startAt]="maxDate"></mat-datepicker>
-                    <mat-error> {{ errorFecha() }} </mat-error>
-                    <mat-error *ngIf="this.identificacionForm.controls['fechaNacimiento'].hasError">
-                        Debes se mayor de edad para cotizar con nosotros
-                    </mat-error>
-                    <mat-error *ngIf="this.identificacionForm.controls['fechaNacimiento'].hasError('required')">
-                        Selecciona tu fecha de nacimiento para continuar
-                    </mat-error>
-                </mat-form-field>
-                <div class="custom-radio">
-                    <mat-label>Género</mat-label>
-                    <div class="custom-radio-options">
-                        <label class="custom-radio-container">
-                            <input type="radio" name="genero" formControlName="genero" value="1"
-                                class="custom-radio-input">
-                            <span class="custom-radio-content custom-radio-masculino"></span>
-                        </label>
-                        <label class="custom-radio-container">
-                            <input type="radio" name="genero" formControlName="genero" value="2"
-                                class="custom-radio-input">
-                            <span class="custom-radio-content custom-radio-femenino"></span>
-                        </label>
-                    </div>
-                </div>
-                <mat-form-field appearance="outline">
-                    <mat-label>¿Dónde trabajas?</mat-label>
-                    <input matInput placeholder="¿Dónde trabajas?" formControlName="lugarTrabajo" required>
-                    <mat-error> {{errorLugarTrabajo()}} </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <input tab-directive type="text" placeholder="Ciudad" matInput formControlName="ciudad"
-                        [matAutocomplete]="autocompleteCiudad" required [value]="nombreCiudad" />
-                    <mat-label>Ciudad donde trabajas</mat-label>
-                    <mat-autocomplete #autocompleteCiudad="matAutocomplete" autoActiveFirstOption="true"
-                        (optionSelected)="escribirCiudad()">
-                        <mat-option *ngFor="let ciudad of ciudadesList | async" [value]="ciudad">
-                            {{ ciudad.nombre_ciudad }}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
-                
-                <mat-form-field appearance="outline">
-                    <mat-label>¿Dónde vives?</mat-label>
-                    <input matInput placeholder="¿Cuál es tu dirección?" formControlName="direccion" required>
-                    <mat-error> {{errorDireccion()}} </mat-error>
-                </mat-form-field>
-                <div class="form-button-container">
-                    <button mat-raised-button class="form-button" [disabled]="identificacionForm.invalid"
-                        (click)="mostrarPreguntasAdicionales()">SIGUIENTE</button>
-                </div>
-            </form>
+  <div class="lineas-container step">
+    <div class="linea step amarillo"></div>
+    <div class="franja step amarillo"></div>
+  </div>
+  <div class="step-form">
+    <div *ngIf="FormIdentifiacion">
+      <h1>Identificación</h1>
+      <form [formGroup]="identificacionForm" class="form-container">
+        <mat-form-field appearance="outline" required>
+          <mat-label>Tipo Documento</mat-label>
+          <mat-select
+            formControlName="tipoIdentificacion"
+            selectFirstOption="true"
+          >
+            <mat-option
+              *ngFor="let tipo of tipoDocumento"
+              [value]="tipo.id_tipo_identificacion"
+            >
+              {{ tipo.nombre_identificacion }}
+            </mat-option>
+          </mat-select>
+          <mat-error> {{ errorDocumento() }} </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Número de documento</mat-label>
+          <input
+            matInput
+            placeholder="Número de documento"
+            formControlName="numeroIdentificacion"
+            required
+          />
+          <mat-error> {{ errorNumeroDocumento() }} </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de expedición documento</mat-label>
+          <input
+            matInput
+            [matDatepicker]="calendarIcon"
+            formControlName="fechaExpedicionDocumento"
+            placeholder="DD/MM/AAAA"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="calendarIcon"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #calendarIcon [startAt]="maxDate"></mat-datepicker>
+          <mat-error>
+            {{ errorFechaExpedicion() }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de nacimiento</mat-label>
+          <input
+            matInput
+            [matDatepicker]="calendarIcon2"
+            [min]="minDate"
+            [max]="maxDate"
+            formControlName="fechaNacimiento"
+            placeholder="DD/MM/AAAA"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="calendarIcon2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #calendarIcon2 [startAt]="maxDate"></mat-datepicker>
+          <mat-error> {{ errorFecha() }} </mat-error>
+          <mat-error
+            *ngIf="this.identificacionForm.controls['fechaNacimiento'].hasError"
+          >
+            Debes se mayor de edad para cotizar con nosotros
+          </mat-error>
+          <mat-error
+            *ngIf="
+              this.identificacionForm.controls['fechaNacimiento'].hasError(
+                'required'
+              )
+            "
+          >
+            Selecciona tu fecha de nacimiento para continuar
+          </mat-error>
+        </mat-form-field>
+        <div class="custom-radio">
+          <mat-label>Género</mat-label>
+          <div class="custom-radio-options">
+            <label class="custom-radio-container">
+              <input
+                type="radio"
+                name="genero"
+                formControlName="genero"
+                value="1"
+                class="custom-radio-input"
+              />
+              <span class="custom-radio-content custom-radio-masculino"></span>
+            </label>
+            <label class="custom-radio-container">
+              <input
+                type="radio"
+                name="genero"
+                formControlName="genero"
+                value="2"
+                class="custom-radio-input"
+              />
+              <span class="custom-radio-content custom-radio-femenino"></span>
+            </label>
+          </div>
         </div>
-        <div class="">
-            <div *ngIf="PreguntasAdicionales">
-                <h1>Preguntas Adicionales</h1>
-                <form [formGroup]="preguntasAdicionalesForm" class="form-container preguntas-adicionales">
-                    <div class="pregunta">
-                        <p>
-                            ¿Ha habido algún reclamo o demanda que se haya formulado en su contra?
-                        </p>
-                        <div class="custom-radio yes-no">
-                            <div class="custom-radio-options yes-no">
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaUno" formControlName="preguntaUno" value="1"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">Sí</span>
-                                </label>
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaUno" formControlName="preguntaUno" value="2"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">No</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pregunta">
-                        <p>¿Tiene Ud. conocimiento alguno de reclamos pendientes, de cualquier actividad
-                            (incluyendo petición de
-                            historias clínicas) o de circunstancia alguna que pudiese dar surgimiento a un reclamo o
-                            demanda en el futuro?</p>
-                        <div class="custom-radio">
-                            <div class="custom-radio-options yes-no">
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaDos" formControlName="preguntaDos" value="1"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">Sí</span>
-                                </label>
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaDos" formControlName="preguntaDos" value="2"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">No</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pregunta">
-                        <p>
-                            ¿Alguna vez ha sido Ud. Rechazado, censurado, restringido, suspendido o revocado por
-                            alguna sociedad o asociación médica profesional?
-                        </p>
-                        <div class="custom-radio">
-                            <div class="custom-radio-options yes-no">
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaTres" formControlName="preguntaTres" value="1"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">Sí</span>
-                                </label>
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaTres" formControlName="preguntaTres" value="2"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">No</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pregunta">
-                        <p>
-                            ¿Tiene Ud. conocimiento alguno de reclamos pendientes, de cualquier actividad
-                            (incluyendo petición de
-                            historias clínicas) o de circunstancia alguna que pudiese dar surgimiento a un reclamo o
-                            demanda en el futuro?
-                        </p>
-                        <div class="custom-radio">
-                            <div class="custom-radio-options yes-no">
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaCuatro" formControlName="preguntaCuatro" value="1"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">Sí</span>
-                                </label>
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaCuatro" formControlName="preguntaCuatro" value="2"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">No</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pregunta">
-                        <p>¿Alguna vez se le ha suspendido, revocado o en cualquier forma limitado su licencia
-                            médica, o su certificación en alguna especialidad? </p>
-                        <div class="custom-radio">
-                            <div class="custom-radio-options yes-no">
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaCinco" formControlName="preguntaCinco" value="1"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">Sí</span>
-                                </label>
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaCinco" formControlName="preguntaCinco" value="2"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">No</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pregunta">
-                        <p>
-                            ¿Ha habido algún cambio en su práctica o especialidad en los últimos cinco (5) años?
-                        </p>
-                        <div class="custom-radio">
-                            <div class="custom-radio-options yes-no">
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaSeis" formControlName="preguntaSeis" value="1"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">Sí</span>
-                                </label>
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaSeis" formControlName="preguntaSeis" value="2"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">No</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pregunta">
-                        <p>¿Desempeña funciones para alguna institución que presta servicios de emergencias
-                            domiciliarias? </p>
-                        <div class="custom-radio">
-                            <div class="custom-radio-options yes-no">
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaSiete" formControlName="preguntaSiete" value="1"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">Sí</span>
-                                </label>
-                                <label class="custom-radio-container yes-no-question">
-                                    <input type="radio" name="preguntaSiete" formControlName="preguntaSiete" value="2"
-                                        class="custom-radio-input-yes-no">
-                                    <span class="custom-radio-text">No</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-button-container">
-                        <button mat-raised-button class="form-button" [disabled]="preguntasAdicionalesForm.invalid"
-                            (click)="adjuntarDocumentos()">SIGUIENTE</button>
-                    </div>
-                </form>
+        <mat-form-field appearance="outline">
+          <mat-label>¿Dónde trabajas?</mat-label>
+          <input
+            matInput
+            placeholder="¿Dónde trabajas?"
+            formControlName="lugarTrabajo"
+            required
+          />
+          <mat-error> {{ errorLugarTrabajo() }} </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input
+            tab-directive
+            type="text"
+            placeholder="Ciudad"
+            matInput
+            formControlName="ciudad"
+            [matAutocomplete]="autocompleteCiudad"
+            required
+            [value]="nombreCiudad"
+          />
+          <mat-label>Ciudad donde trabajas</mat-label>
+          <mat-autocomplete
+            #autocompleteCiudad="matAutocomplete"
+            autoActiveFirstOption="true"
+            (optionSelected)="escribirCiudad()"
+          >
+            <mat-option
+              *ngFor="let ciudad of ciudadesList | async"
+              [value]="ciudad"
+            >
+              {{ ciudad.nombre_ciudad }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>¿Dónde vives?</mat-label>
+          <input
+            matInput
+            placeholder="¿Cuál es tu dirección?"
+            formControlName="direccion"
+            required
+          />
+          <mat-error> {{ errorDireccion() }} </mat-error>
+        </mat-form-field>
+        <div class="form-button-container">
+          <button
+            mat-raised-button
+            class="form-button"
+            [disabled]="identificacionForm.invalid"
+            (click)="mostrarPreguntasAdicionales()"
+          >
+            SIGUIENTE
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="">
+      <div *ngIf="PreguntasAdicionales">
+        <h1>Preguntas Adicionales</h1>
+        <form
+          [formGroup]="preguntasAdicionalesForm"
+          class="form-container preguntas-adicionales"
+        >
+          <div class="pregunta">
+            <p>
+              ¿Ha habido algún reclamo o demanda que se haya formulado en su
+              contra?
+            </p>
+            <div class="custom-radio yes-no">
+              <div class="custom-radio-options yes-no">
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaUno"
+                    formControlName="preguntaUno"
+                    value="1"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">Sí</span>
+                </label>
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaUno"
+                    formControlName="preguntaUno"
+                    value="2"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">No</span>
+                </label>
+              </div>
             </div>
-        </div>
-    </div>
-    <div class="detalles-container">
-        <div class="aclaraciones-container">
-            <div class="aclaraciones-text profesion">
-                <div>
-                    <div class="general">
-                        <h2>¿Por qué me piden estos datos?</h2>
-                        <p>Estos datos hacen parte del proceso de generación y emisión de tu póliza de responsabilidad
-                            civil médica.,
-                            es por esto que es necesario completar esta información para continuar con tu proceso.</p>
-                    </div>
-                </div>
+          </div>
+          <div class="pregunta">
+            <p>
+              ¿Tiene Ud. conocimiento alguno de reclamos pendientes, de
+              cualquier actividad (incluyendo petición de historias clínicas) o
+              de circunstancia alguna que pudiese dar surgimiento a un reclamo o
+              demanda en el futuro?
+            </p>
+            <div class="custom-radio">
+              <div class="custom-radio-options yes-no">
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaDos"
+                    formControlName="preguntaDos"
+                    value="1"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">Sí</span>
+                </label>
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaDos"
+                    formControlName="preguntaDos"
+                    value="2"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">No</span>
+                </label>
+              </div>
             </div>
+          </div>
+          <div class="pregunta">
+            <p>
+              ¿Alguna vez ha sido Ud. Rechazado, censurado, restringido,
+              suspendido o revocado por alguna sociedad o asociación médica
+              profesional?
+            </p>
+            <div class="custom-radio">
+              <div class="custom-radio-options yes-no">
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaTres"
+                    formControlName="preguntaTres"
+                    value="1"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">Sí</span>
+                </label>
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaTres"
+                    formControlName="preguntaTres"
+                    value="2"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">No</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="pregunta">
+            <p>
+              ¿Tiene Ud. conocimiento alguno de reclamos pendientes, de
+              cualquier actividad (incluyendo petición de historias clínicas) o
+              de circunstancia alguna que pudiese dar surgimiento a un reclamo o
+              demanda en el futuro?
+            </p>
+            <div class="custom-radio">
+              <div class="custom-radio-options yes-no">
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaCuatro"
+                    formControlName="preguntaCuatro"
+                    value="1"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">Sí</span>
+                </label>
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaCuatro"
+                    formControlName="preguntaCuatro"
+                    value="2"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">No</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="pregunta">
+            <p>
+              ¿Alguna vez se le ha suspendido, revocado o en cualquier forma
+              limitado su licencia médica, o su certificación en alguna
+              especialidad?
+            </p>
+            <div class="custom-radio">
+              <div class="custom-radio-options yes-no">
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaCinco"
+                    formControlName="preguntaCinco"
+                    value="1"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">Sí</span>
+                </label>
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaCinco"
+                    formControlName="preguntaCinco"
+                    value="2"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">No</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="pregunta">
+            <p>
+              ¿Ha habido algún cambio en su práctica o especialidad en los
+              últimos cinco (5) años?
+            </p>
+            <div class="custom-radio">
+              <div class="custom-radio-options yes-no">
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaSeis"
+                    formControlName="preguntaSeis"
+                    value="1"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">Sí</span>
+                </label>
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaSeis"
+                    formControlName="preguntaSeis"
+                    value="2"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">No</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="pregunta">
+            <p>
+              ¿Desempeña funciones para alguna institución que presta servicios
+              de emergencias domiciliarias?
+            </p>
+            <div class="custom-radio">
+              <div class="custom-radio-options yes-no">
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaSiete"
+                    formControlName="preguntaSiete"
+                    value="1"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">Sí</span>
+                </label>
+                <label class="custom-radio-container yes-no-question">
+                  <input
+                    type="radio"
+                    name="preguntaSiete"
+                    formControlName="preguntaSiete"
+                    value="2"
+                    class="custom-radio-input-yes-no"
+                  />
+                  <span class="custom-radio-text">No</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-button-container">
+            <button
+              mat-raised-button
+              class="form-button"
+              [disabled]="preguntasAdicionalesForm.invalid"
+              (click)="adjuntarDocumentos()"
+            >
+              SIGUIENTE
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="detalles-container">
+    <div class="aclaraciones-container">
+      <div class="aclaraciones-text profesion">
+        <div>
+          <div class="general">
+            <h2>¿Por qué me piden estos datos?</h2>
+            <p>
+              Estos datos hacen parte del proceso de generación y emisión de tu
+              póliza de responsabilidad civil médica., es por esto que es
+              necesario completar esta información para continuar con tu
+              proceso.
+            </p>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="footer-grid">
-        <app-footer></app-footer>
-    </div>
+  </div>
+  <div class="footer-grid">
+    <app-footer></app-footer>
+  </div>
 </div>

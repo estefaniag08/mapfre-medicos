@@ -21,7 +21,9 @@ import { ConsultasPolizaMedicoService } from './../services/consultas-poliza-med
 import { EspecialidadMedico } from './../interfaces/PolizaMedConsultas';
 
 declare global {
-  interface Window { dataLayer: any[]; }
+  interface Window {
+    dataLayer: any[];
+  }
 }
 @Component({
   selector: 'app-home',
@@ -93,7 +95,8 @@ export class HomeComponent implements OnInit {
         puntuacionPath4: 'assets/iconos/star-filled.svg',
         puntuacionPath5: 'assets/iconos/star.svg',
       },
-      userComment: 'Muy sencillo el proceso logré hacerlo digitalmente y obtuve la póliza en 1 hora.',
+      userComment:
+        'Muy sencillo el proceso logré hacerlo digitalmente y obtuve la póliza en 1 hora.',
     },
 
     {
@@ -106,7 +109,8 @@ export class HomeComponent implements OnInit {
         puntuacionPath4: 'assets/iconos/star-filled.svg',
         puntuacionPath5: 'assets/iconos/star-filled.svg',
       },
-      userComment: 'Excelente servicio, requería la póliza para la firma del contrato y logré obtenerla rápido y sin salir de mi casa.',
+      userComment:
+        'Excelente servicio, requería la póliza para la firma del contrato y logré obtenerla rápido y sin salir de mi casa.',
     },
   ];
 
@@ -179,9 +183,9 @@ export class HomeComponent implements OnInit {
         especialidades.map((esp) => {
           this.especialidades.push(esp);
         });
-        this.especialidades.sort((a,b) => {
-          return a.nombre_especialidad.localeCompare(b.nombre_especialidad)
-        })
+        this.especialidades.sort((a, b) => {
+          return a.nombre_especialidad.localeCompare(b.nombre_especialidad);
+        });
         /**
          * @description Permite filtrar las especialidades a medida que el usuario escribe en el input
          */
@@ -215,10 +219,12 @@ export class HomeComponent implements OnInit {
    * @description Permite filtar la especialidad escrita por el usuario dentro del listado
    * @param nombreEspecialidad
    */
-  private _filtroEspecialidad(nombreEspecialidad: string): EspecialidadMedico[] { 
+  private _filtroEspecialidad(
+    nombreEspecialidad: string
+  ): EspecialidadMedico[] {
     const letraFiltro = nombreEspecialidad.toString().toLowerCase();
     return this.especialidades.filter((option) =>
-    option.nombre_especialidad.toLowerCase().includes(letraFiltro)
+      option.nombre_especialidad.toLowerCase().includes(letraFiltro)
     );
   }
 
@@ -231,9 +237,10 @@ export class HomeComponent implements OnInit {
   seleccionEspecialidadEnter(key) {
     let char = key.keyCode;
     if (char === 13) {
-      this.nombreEspecialidad = this.especialidadForm.controls[
-        'especialidadMedico'
-      ].value.nombre_especialidad;
+      this.nombreEspecialidad =
+        this.especialidadForm.controls[
+          'especialidadMedico'
+        ].value.nombre_especialidad;
     }
   }
 
@@ -241,9 +248,10 @@ export class HomeComponent implements OnInit {
    * Este método imprime en el input type text el texto de la opción seleccionada por el usuario
    */
   escribirEspecialidad() {
-    this.nombreEspecialidad = this.especialidadForm.controls[
-      'especialidadMedico'
-    ].value.nombre_especialidad;    
+    this.nombreEspecialidad =
+      this.especialidadForm.controls[
+        'especialidadMedico'
+      ].value.nombre_especialidad;
   }
 
   /**
@@ -252,17 +260,19 @@ export class HomeComponent implements OnInit {
    */
   enviarEspecialidad() {
     if (this.especialidadForm.invalid) {
-      
     } else {
-            //Evento personalizado google tag
-            window.dataLayer.push({
-              event: 'especialidad_seleccionada',
-              especialidad: this.especialidadForm.controls['especialidadMedico'].value.nombre_especialidad
-            });
-            
+      //Evento personalizado google tag
+      window.dataLayer.push({
+        event: 'especialidad_seleccionada',
+        especialidad:
+          this.especialidadForm.controls['especialidadMedico'].value
+            .nombre_especialidad,
+      });
+
       this.medicoConsultaServ.setEspecialidadMedico(
         this.especialidadForm.controls['especialidadMedico'].value
-          .id_especialidad_medico, this.especialidadForm.controls['especialidadMedico'].value
+          .id_especialidad_medico,
+        this.especialidadForm.controls['especialidadMedico'].value
           .nombre_especialidad
       );
       this.router.navigate(['cotizacion'], { relativeTo: this.route.parent });
@@ -273,7 +283,8 @@ export class HomeComponent implements OnInit {
    * @method
    * @description Redirige a la página de cotización
    */
-  enrutarAPaginaCotizacion(){
+  enrutarAPaginaCotizacion() {
+    console.log('rutaaa: ' + this.route.parent);
     this.router.navigate(['mostrar-cotizacion'], {
       relativeTo: this.route.parent,
     });
@@ -283,8 +294,8 @@ export class HomeComponent implements OnInit {
    * @method
    * @description Verifica que el formulario se haya finalizado
    */
-  formularioCotizacionFinalizado(finalizado:boolean){
-    if(finalizado){
+  formularioCotizacionFinalizado(finalizado: boolean) {
+    if (finalizado) {
       this.enrutarAPaginaCotizacion();
     }
   }

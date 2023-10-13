@@ -4,7 +4,7 @@ import { AdjuntarDocumentosComponent } from './adjuntar-documentos.component';
 
 
 const routes: Routes = [
-  { path: 'documentos/:userId', component: AdjuntarDocumentosComponent, pathMatch: 'full' },
+  //{ path: 'documentos/:userId', component: AdjuntarDocumentosComponent, pathMatch: 'full' },
   { path: '', component: AdjuntarDocumentosComponent, pathMatch: 'full' },
 ];
 

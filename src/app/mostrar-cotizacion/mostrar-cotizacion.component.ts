@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogConfig,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CambioRcComponent } from '../cambio-rc/cambio-rc.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RCMedico, ClaseMedico } from '../interfaces/PolizaMedConsultas';
@@ -13,7 +10,7 @@ import { PersonaSolicitudesService } from './../services/persona-solicitudes.ser
  * @var value Corresponde al id del en BD
  * @var viewValue a los textos que se imprimirán en pantalla
  */
- interface InterfaceGlobal {
+interface InterfaceGlobal {
   value: string;
   viewValue: string;
 }
@@ -37,20 +34,25 @@ export class MostrarCotizacionComponent implements OnInit {
    */
   dialogConfig = new MatDialogConfig();
 
-  constructor(public dialog: MatDialog, private router: Router,
-    private route: ActivatedRoute, private consultaMedService: ConsultasPolizaMedicoService,
-    private personaService: PersonaSolicitudesService ) {}
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute,
+    private consultaMedService: ConsultasPolizaMedicoService,
+    private personaService: PersonaSolicitudesService
+  ) {}
   /**
    * @description Este es el valor de la cotización
    */
   valorCotizacion: RCMedico = null;
   ngOnInit(): void {
     //this.personaService.anadirInformacionCotizacion(this.consultaMedService.getInformacionCotizacion());
-    this.especialidad =  this.consultaMedService.getEspecialidadNomb();
+    this.especialidad = this.consultaMedService.getEspecialidadNomb();
     this.clase = this.consultaMedService.getClaseNomb();
     this.valorCotizacion = this.consultaMedService.getValorSeleccionado();
     this.cotizaciones = this.consultaMedService.getArregloValoresRc();
-    this.cuarentaPor = parseInt(this.valorCotizacion.rc_medico.numero_rc_medico)*0.40;
+    this.cuarentaPor =
+      parseInt(this.valorCotizacion.rc_medico.numero_rc_medico) * 0.4;
   }
 
   cambiarValor(idClaseRc) {
@@ -59,7 +61,7 @@ export class MostrarCotizacionComponent implements OnInit {
 
     this.dialogConfig.data = {
       idClaseRc,
-      arregloCotizaciones: this.cotizaciones
+      arregloCotizaciones: this.cotizaciones,
     };
 
     /**
@@ -72,14 +74,17 @@ export class MostrarCotizacionComponent implements OnInit {
     /**
      * @description Recibe el valor actualizado en el diálogo para imprimirlo en pantalla
      */
-    dialogRef.afterClosed().subscribe(data => {
+    dialogRef.afterClosed().subscribe((data) => {
       this.valorCotizacion = this.consultaMedService.getValorSeleccionado();
-      this.cuarentaPor = parseInt(this.valorCotizacion.rc_medico.numero_rc_medico)*0.40;
+      this.cuarentaPor =
+        parseInt(this.valorCotizacion.rc_medico.numero_rc_medico) * 0.4;
     });
   }
 
   adquirirSeguro() {
-    this.personaService.anadirInformacionCotizacionCorreo(this.consultaMedService.getInformacionCotizacion());
-    this.router.navigate(['identificacion-medico'], { relativeTo: this.route.parent });
+    this.personaService.anadirInformacionCotizacionCorreo(
+      this.consultaMedService.getInformacionCotizacion()
+    );
+    this.router.navigate(['identificacion-medico']);
   }
 }

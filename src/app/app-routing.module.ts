@@ -14,7 +14,27 @@ export const routes: Routes = [
     path: '',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
-
+  {
+    path: 'mostrar-cotizacion',
+    loadChildren: () =>
+      import('./mostrar-cotizacion/mostrar-cotizacion.module').then(
+        (m) => m.MostrarCotizacionModule
+      ),
+  },
+  {
+    path: 'identificacion-medico',
+    loadChildren: () =>
+      import('./identificacion/identificacion.module').then(
+        (m) => m.IdentificacionModule
+      ),
+  },
+  {
+    path: 'resumen-cotizacion',
+    loadChildren: () =>
+      import('./resumen-cotizacion/resumen-cotizacion.module').then(
+        (m) => m.ResumenCotizacionModule
+      ),
+  },
   { path: '**', component: ErrorpageComponent },
 ];
 

@@ -299,7 +299,7 @@ export class AdjuntarDocumentosComponent implements OnInit {
       }
 
       if (this.arrayUrl[2] === 'adjuntar-documentos') {
-        this.router.navigate(['resumen-cotizacion'], { relativeTo: this.route.parent });
+        this.router.navigate(['resumen-cotizacion']);
       } else {
         Swal.fire('Subiste tus documentos con éxito.', ' ', 'success').then(res => {
           this.router.navigate([''])
@@ -312,9 +312,7 @@ export class AdjuntarDocumentosComponent implements OnInit {
 
   adjuntarDocumentosDespues() {
     if(this.arrayUrl[2] === 'adjuntar-documentos'){
-      this.router.navigate(['resumen-cotizacion'], {
-        relativeTo: this.route.parent,
-      });
+      this.router.navigate(['resumen-cotizacion']);
     } else {
         this.router.navigate([''])
     }

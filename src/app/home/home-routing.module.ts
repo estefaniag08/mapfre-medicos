@@ -9,10 +9,6 @@ import { HomeComponent } from './home.component';
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   // { path: 'home', redirectTo: '' },
-  {
-    path: 'mostrar-cotizacion',
-    loadChildren: () => import('./../mostrar-cotizacion/mostrar-cotizacion.module').then((m) => m.MostrarCotizacionModule),
-  },
 ];
 
 @NgModule({
