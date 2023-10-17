@@ -1,15 +1,9 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
   AbstractControl,
   ValidatorFn,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import {
   MatDialog,
   MatDialogRef,
@@ -17,7 +11,6 @@ import {
 } from '@angular/material/dialog';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
-import { ConsultasPolizaMedicoService } from './../services/consultas-poliza-medico.service';
 import { EspecialidadMedico } from './../interfaces/PolizaMedConsultas';
 
 declare global {
@@ -31,27 +24,6 @@ declare global {
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  /**
-   * @description Array de especialidades
-   */
-  especialidades: EspecialidadMedico[] = [];
-  especialidadList: Observable<EspecialidadMedico[]>;
-
-  /**
-   * @description Controlador de validación para campos tipo SELECT
-   */
-  selectFormControl = new FormControl('', Validators.required);
-
-  /**
-   * @description Declaración de formulario
-   */
-  especialidadForm: FormGroup;
-
-  /**
-   * @description Valor que ingresa el usuario para filtrar
-   */
-  nombreEspecialidad: string;
-
   /**
    * @description Configuración de carousel de comentarios de usuarios
    */
@@ -144,65 +116,19 @@ export class HomeComponent implements OnInit {
     },
   ];
   /**
-   *
-   * @param formBuilder
    * @param router
    * @param dialog
    * @param route
    */
 
   constructor(
-    private formBuilder: FormBuilder,
     private router: Router,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private medicoConsultaServ: ConsultasPolizaMedicoService
   ) {}
 
-  /**
-   * @method
-   * @description Permite imprimir los mensajes de error, cuando los campos del formulario no cumplen con las validaciones
-   * @returns Mensajes de error que se imprimirán en HTML bajo el campo de comentario
-   */
-  errorEspecialidad() {
-    return 'Debes seleccionar una especialidad';
-  }
 
   ngOnInit(): void {
-    /**
-     * @description Declaración de campos para cada formulario y validaciones
-     * @var autocompleteValidator Recibe como parámetro el array local que contiene la información a filtrar
-     */
-    this.especialidadForm = this.formBuilder.group({
-      especialidadMedico: ['', Validators.required],
-      autorizacion: ['', Validators.required],
-    });
-    this.medicoConsultaServ
-      .getEspecialidadesMedico()
-      .subscribe((especialidades) => {
-        especialidades.map((esp) => {
-          this.especialidades.push(esp);
-        });
-        this.especialidades.sort((a, b) => {
-          return a.nombre_especialidad.localeCompare(b.nombre_especialidad);
-        });
-        /**
-         * @description Permite filtrar las especialidades a medida que el usuario escribe en el input
-         */
-        this.especialidadList = this.especialidadForm.controls[
-          'especialidadMedico'
-        ].valueChanges.pipe(
-          startWith<string | EspecialidadMedico>(''),
-          map((value) =>
-            typeof value === 'string' ? value : value.id_especialidad_medico
-          ),
-          map((nombreEspecialidad) =>
-            nombreEspecialidad
-              ? this._filtroEspecialidad(nombreEspecialidad)
-              : this.especialidades.slice()
-          )
-        );
-      });
   }
 
   /**
@@ -213,70 +139,6 @@ export class HomeComponent implements OnInit {
     return especialidad && especialidad.nombre_especialidad
       ? especialidad.nombre_especialidad
       : '';
-  }
-
-  /**
-   * @description Permite filtar la especialidad escrita por el usuario dentro del listado
-   * @param nombreEspecialidad
-   */
-  private _filtroEspecialidad(
-    nombreEspecialidad: string
-  ): EspecialidadMedico[] {
-    const letraFiltro = nombreEspecialidad.toString().toLowerCase();
-    return this.especialidades.filter((option) =>
-      option.nombre_especialidad.toLowerCase().includes(letraFiltro)
-    );
-  }
-
-  /**
-   * Este método permite seleccionar e imprimir en el input type text la opción seleccionada cuando el usuario filtra y solo pulsa enter
-   * @param key Permite capturar el código ASCII de la tecla presionada por el usuario
-   * CÓDIGO ASCII DE ENTER = 13
-   */
-
-  seleccionEspecialidadEnter(key) {
-    let char = key.keyCode;
-    if (char === 13) {
-      this.nombreEspecialidad =
-        this.especialidadForm.controls[
-          'especialidadMedico'
-        ].value.nombre_especialidad;
-    }
-  }
-
-  /**
-   * Este método imprime en el input type text el texto de la opción seleccionada por el usuario
-   */
-  escribirEspecialidad() {
-    this.nombreEspecialidad =
-      this.especialidadForm.controls[
-        'especialidadMedico'
-      ].value.nombre_especialidad;
-  }
-
-  /**
-   * @method
-   * @description Permite enviar la especialidad del médico siempre y cuando haya sido seleccionada
-   */
-  enviarEspecialidad() {
-    if (this.especialidadForm.invalid) {
-    } else {
-      //Evento personalizado google tag
-      window.dataLayer.push({
-        event: 'especialidad_seleccionada',
-        especialidad:
-          this.especialidadForm.controls['especialidadMedico'].value
-            .nombre_especialidad,
-      });
-
-      this.medicoConsultaServ.setEspecialidadMedico(
-        this.especialidadForm.controls['especialidadMedico'].value
-          .id_especialidad_medico,
-        this.especialidadForm.controls['especialidadMedico'].value
-          .nombre_especialidad
-      );
-      this.router.navigate(['cotizacion'], { relativeTo: this.route.parent });
-    }
   }
 
   /**
@@ -299,24 +161,7 @@ export class HomeComponent implements OnInit {
       this.enrutarAPaginaCotizacion();
     }
   }
-  /**
-   * @method
-   * @description Permite abrir el diálogo que contiene el tratamiento de datos personales del cotizador
-   */
-  atdp() {
-    this.dialog.open(DialogATDP, {
-      panelClass: 'custom-dialog-container',
-    });
-  }
-  /**
-   * @method
-   * @description Permite abrir el diálogo que contiene los términos y condiciones del sitio
-   */
-  terminos() {
-    this.dialog.open(DialogTerminos, {
-      panelClass: 'custom-dialog-container',
-    });
-  }
+
 
   /**
    * @method
