@@ -12,6 +12,12 @@
     color: white;
 }
 
+.form-button:disabled {
+    background-color: rgba(238, 238, 238);
+    color: rgba(171, 171, 171);
+    border-color: rgba(208, 208, 208);
+}
+
 .close-dialog-button {
     -webkit-appearance: none;
     appearance: none;
