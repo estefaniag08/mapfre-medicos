@@ -9,7 +9,7 @@
   display: grid;
   height: calc(100vh - 150px);
   grid-template-columns: repeat(4, 25%);
-  grid-template-rows: 150px calc(90vh - 150px) 150px auto;
+  //grid-template-rows: 150px calc(90vh - 150px) 150px auto;
   align-items: stretch;
 }
 .step-form {
@@ -81,6 +81,12 @@
 
 // Custom Radio Button
 
+.custom-radio{
+  display: flex;
+  align-items: center;
+  padding-bottom: 1.34375em;
+}
+
 .custom-radio.yes-no .mat-label{
   margin: 0;
 }
@@ -89,7 +95,7 @@
   display: flex;
   justify-content: space-between;
   width: 160px;
-  margin: 10px auto 0 auto;
+  margin: 0 auto 0 auto;
 }
 
 .custom-radio-options.yes-no {
@@ -268,7 +274,6 @@ mat-hint a {
     grid-column: 1 / 1;
     grid-row: 2 / 3;
   }
-
   .footer-grid {
     grid-column: 1/1;
     grid-row: 3/4;
