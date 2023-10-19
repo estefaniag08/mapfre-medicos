@@ -146,7 +146,6 @@ export class HomeComponent implements OnInit {
    * @description Redirige a la página de cotización
    */
   enrutarAPaginaCotizacion() {
-    console.log('rutaaa: ' + this.route.parent);
     this.router.navigate(['mostrar-cotizacion'], {
       relativeTo: this.route.parent,
     });

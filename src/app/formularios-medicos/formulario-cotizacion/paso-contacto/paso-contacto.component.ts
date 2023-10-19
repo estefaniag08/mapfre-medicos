@@ -21,7 +21,6 @@ export class PasoContactoComponent implements OnInit {
    * @description Metodo encargado de emitir al padre el momento en que el formulario finaliza
    */
   emitirFormularioFinalizado(finalizado: boolean) {
-    console.log("hola");
     this.formularioContactoFinalizado.emit(finalizado);
   }
 

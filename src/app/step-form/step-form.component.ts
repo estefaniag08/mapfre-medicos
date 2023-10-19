@@ -159,7 +159,6 @@ export class StepFormComponent implements OnInit {
       });
       //Evento personalizado google tag
       let index = this.valorAsegurado.findIndex(valor => valor.id_clase_rc_medico === this.profesion.controls['valorAsegurado'].value)
-      console.log(index)
       window.dataLayer.push({
         event: 'rc_seleccionado',
         rc: this.valorAsegurado[index].rc_medico.numero_rc_medico
