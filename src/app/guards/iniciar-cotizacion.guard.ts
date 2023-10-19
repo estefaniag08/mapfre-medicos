@@ -12,12 +12,9 @@ export class IniciarCotizacionGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      const existeEspecialidad = this.polizaService.getClaseNomb;
-      console.log(existeEspecialidad);
-
-      const trueK =true
+      const existeEspecialidad = this.polizaService.getClaseNomb();
       
-      if (trueK) { 
+      if (existeEspecialidad == null) { 
         this.router.navigate(['']);
         // Si devolvemos FALSE no de permitirá el acceso
         return false;

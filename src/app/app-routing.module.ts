@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 import { AdjuntarDocumentosComponent } from './adjuntar-documentos/adjuntar-documentos.component';
+import { IniciarCotizacionGuard } from './guards/iniciar-cotizacion.guard';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,7 @@ export const routes: Routes = [
       import('./mostrar-cotizacion/mostrar-cotizacion.module').then(
         (m) => m.MostrarCotizacionModule
       ),
+      canActivate: [IniciarCotizacionGuard]
   },
   {
     path: 'identificacion-medico',
@@ -27,6 +29,7 @@ export const routes: Routes = [
       import('./identificacion/identificacion.module').then(
         (m) => m.IdentificacionModule
       ),
+      canActivate: [IniciarCotizacionGuard]
   },
   {
     path: 'resumen-cotizacion',
@@ -34,6 +37,7 @@ export const routes: Routes = [
       import('./resumen-cotizacion/resumen-cotizacion.module').then(
         (m) => m.ResumenCotizacionModule
       ),
+      canActivate: [IniciarCotizacionGuard]
   },
   { path: '**', component: ErrorpageComponent },
 ];

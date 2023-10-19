@@ -1,16 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MostrarCotizacionComponent } from './mostrar-cotizacion.component';
+import { IniciarCotizacionGuard } from '../guards/iniciar-cotizacion.guard';
 
 const routes: Routes = [
-  { path: '', component: MostrarCotizacionComponent, pathMatch: 'full' },
-  {
-    path: 'identificacion-medico',
-    loadChildren: () =>
-      import('./../identificacion/identificacion.module').then(
-        (m) => m.IdentificacionModule
-      ),
-  },
+  { path: '', component: MostrarCotizacionComponent, pathMatch: 'full'}
 ];
 
 @NgModule({
