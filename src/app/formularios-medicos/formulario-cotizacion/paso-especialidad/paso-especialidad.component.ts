@@ -312,7 +312,6 @@ export class PasoEspecialidadComponent implements OnInit {
           valor.id_clase_rc_medico ===
           this.especialidadForm.controls['valorAsegurado'].value
       );
-      console.log(index);
       window.dataLayer.push({
         event: 'rc_seleccionado',
         rc: this.valorAsegurado[index].rc_medico.numero_rc_medico,

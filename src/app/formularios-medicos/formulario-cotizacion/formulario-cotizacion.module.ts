@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormularioCotizacionComponent } from './formulario-cotizacion.component';
@@ -30,6 +31,7 @@ import { FormularioCotizacionComponent } from './formulario-cotizacion.component
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatButtonModule,
     MatDatepickerModule,
   ],
   exports: [FormularioCotizacionComponent],

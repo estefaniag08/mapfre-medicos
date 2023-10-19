@@ -35,9 +35,7 @@
 
   <mat-form-field appearance="outline" required>
     <mat-label>Tipo de procedimiento</mat-label>
-    <mat-select
-      formControlName="tipoMedico"
-    >
+    <mat-select formControlName="tipoMedico">
       <mat-option
         *ngFor="let tipoMedico of tipoMedicos"
         (click)="obtenerRcPorClase()"
@@ -53,10 +51,7 @@
   </mat-form-field>
   <mat-form-field appearance="outline" required>
     <mat-label>Valor asegurado</mat-label>
-    <mat-select
-      formControlName="valorAsegurado"
-
-    >
+    <mat-select formControlName="valorAsegurado">
       <mat-option
         *ngFor="let valor of valorAsegurado"
         [value]="valor.id_clase_rc_medico"
