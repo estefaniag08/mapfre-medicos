@@ -7,7 +7,8 @@
 }
 .step-grid {
   display: grid;
-  height: calc(100vh - 150px);
+  //height: calc(100vh - 150px);
+  margin-top: 58px;
   grid-template-columns: repeat(4, 25%);
   //grid-template-rows: 150px calc(90vh - 150px) 150px auto;
   align-items: stretch;
@@ -17,6 +18,7 @@
   grid-row: 2 / 3;
   justify-self: center;
   align-self: center;
+  padding-bottom: 0.34375em;
 }
 
 .detalles-container {
